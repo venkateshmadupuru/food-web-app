@@ -1,0 +1,21 @@
+.shimmer {
+  background-image: linear-gradient(
+    to right,
+    rgba(234, 229, 229, 0.6) 0%,
+    rgba(245, 245, 245, 0.8) 50%,
+    rgba(234, 229, 229, 0.6) 100%
+  );
+  background-size: 1000px 100%;
+  background-repeat: no-repeat;
+  background-position: -1000px 0;
+  animation: effect 3s infinite linear;
+}
+
+@keyframes effect {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
