@@ -47,13 +47,15 @@ const Header = ({ loading }) => {
     <div className="flex justify-between items-center shadow-md dark:bg-gray-800 dark:text-white font-serif">
       <div>
         <img
-          className="logo w-16 h-16 bg-orange-600 m-3 rounded-full p-1 hover:scale-105 transition-transform duration-300"
+          className="logo w-16 h-16 bg-orange-600 m-3 rounded-full p-1 
+          hover:scale-105 transition-transform duration-300"
           src={LOGO_URL}
           alt="brand-logo"
         />
       </div>
       <div>
-        <h1 className="text-3xl text-center font-extrabold bg-gradient-to-br from-orange-400 to-yellow-500 bg-clip-text text-transparent hidden md:block">
+        <h1 className="text-3xl text-center font-extrabold bg-gradient-to-br from-orange-400
+         to-yellow-500 bg-clip-text text-transparent hidden md:block">
           Welcome to BigBite 
           <span className="bg-gradient-to-tr from-rose-400 bg-clip-text text-transparent ml-1">
             {user ? user.displayName : "Foodie"}

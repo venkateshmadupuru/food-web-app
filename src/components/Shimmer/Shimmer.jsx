@@ -1,4 +1,4 @@
-import FoodChoiceShimmer from "../Body/FoodChoiceShimmer";
+import FoodChoiceShimmer from "../Home/FoodChoiceShimmer";
 import "./Shimmer.css";
 const Shimmer = () => {
   return (
@@ -9,7 +9,7 @@ const Shimmer = () => {
         <div className="shimmer w-24 h-12 rounded-full"></div>
       </div>
       {/* Food Choices Carousel Shimmer */}
-      <FoodChoiceShimmer/>
+      <FoodChoiceShimmer />
       {/* Restaurant Cards Grid Shimmer */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 px-2">
         {Array.from({ length: 20 }).map((_, i) => (
