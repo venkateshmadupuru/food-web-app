@@ -4,6 +4,7 @@ import "./index.css";
 import AuthProvider from "./components/Auth/AuthProvider";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import Footer from "./components/Footer/Footer";
 
 const App = () => {
   const theme = useSelector((store) => store.theme.mode);
@@ -23,6 +24,7 @@ const App = () => {
       <div className="min-h-screen dark:bg-gray-900 dark:text-black">
         <Header loading={loading} />
         <Outlet/>
+        <Footer/>
       </div>
     </AuthProvider>
   );
