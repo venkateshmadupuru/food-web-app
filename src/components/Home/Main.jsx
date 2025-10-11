@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Shimmer from "../Shimmer/Shimmer.jsx";
-import useOnlineStatus from "../../hooks/useOnlineStatus.jsx";
+import useOnlineStatus from "../../hooks/useOnlineStatus";
 import FoodChoices from "./FoodChoice.jsx";
 import RestaurantCard from "../Restaurant/RestaurantCard.jsx";
 

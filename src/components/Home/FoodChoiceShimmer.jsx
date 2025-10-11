@@ -3,8 +3,7 @@ import "../Shimmer/Shimmer.css"
 const FoodChoiceShimmer = () => {
   return (
     <div className="relative w-full px-4 md:px-8">
-      <h2 className="shimmer h-10 w-18 rounded-full">
-      </h2>
+      <div className="shimmer w-96 h-8 mt-8 rounded-md"></div>  
       <div className="flex gap-4 px-6 py-4">
         {Array.from({ length: 16 }).map((_, i) => (
           <div

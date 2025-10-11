@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaFacebook, FaInstagram, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import FooterShimmer from "./FooterShimmer";
 
 const Footer = () => {
+  const [loading, setLoading]=useState(true);
+
+  useEffect(()=>{
+    const timer=setTimeout(()=> setLoading(false),2000);
+    return ()=> clearTimeout(timer);
+  },[]);
+
+  if(loading) return <FooterShimmer/>;
   return (
-    <div className="bg-white text-gray-800 dark:text-gray-300 dark:bg-gray-800 px-6 py-10 mt-16 min-h-svh md:min-h-fit">
+    <div className="bg-white text-gray-800 dark:text-gray-300 dark:bg-gray-800 px-6 py-10 mt-16 min-h-[300px]">
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 transition-colors [&_li:hover]:text-orange-400">
         <div>
           <h2 className="text-2xl font-bold">BigBite</h2>

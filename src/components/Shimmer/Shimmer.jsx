@@ -11,11 +11,12 @@ const Shimmer = () => {
       {/* Food Choices Carousel Shimmer */}
       <FoodChoiceShimmer />
       {/* Restaurant Cards Grid Shimmer */}
+      <div className="shimmer w-96 h-8 px-6 mt-6 px-8 rounded-md"></div>  
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 px-2">
         {Array.from({ length: 20 }).map((_, i) => (
           <div
             key={i}
-            className="shimmer md:w-full md:h-96 w-full h-96 rounded-xl mt-10"
+            className="shimmer md:w-full md:h-96 w-full h-96 rounded-xl mt-8"
           ></div>
         ))}
       </div>

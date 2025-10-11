@@ -45,7 +45,7 @@ const Cart = () => {
         </>
       )}
       {cartItems.length === 0 && !orderPlaced && (
-        <div className="flex flex-col justify-center items-center text-gray-400 mt-10">
+        <div className="flex flex-col justify-center items-center mt-10">
           <MdRemoveShoppingCart className="text-6xl text-orange-400 mb-3" />
           <h1 className="text-xl md:text-2xl font-semibold text-orange-500 text-center">
             Your cart is empty

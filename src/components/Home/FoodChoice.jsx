@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { CDN_URL } from "../../utils/constants";
-import { ArrowLeftIcon,ArrowRightIcon } from "@heroicons/react/16/solid";
+import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/16/solid";
 import FoodChoiceShimmer from "./FoodChoiceShimmer";
 
 const FoodChoices = ({ images }) => {
@@ -17,7 +17,7 @@ const FoodChoices = ({ images }) => {
     }
   };
 
-   const isLoading = !images || images.length === 0;
+  const isLoading = !images || images.length === 0;
 
   if (isLoading) return <FoodChoiceShimmer />;
 
@@ -28,26 +28,30 @@ const FoodChoices = ({ images }) => {
       </h2>
       <button
         onClick={() => scroll("left")}
-        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-40 text-white z-10 rounded-full hover:bg-opacity-70 hidden sm:block"
+        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-40
+         text-white z-10 rounded-full hover:bg-opacity-70 hidden sm:block"
       >
-        <ArrowLeftIcon className="h-7 w-10"/>
+        <ArrowLeftIcon className="h-7 w-10" />
       </button>
 
       <button
         onClick={() => scroll("right")}
-        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-40 text-white z-10 rounded-full hover:bg-opacity-70 hidden sm:block"
+        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-40
+         text-white z-10 rounded-full hover:bg-opacity-70 hidden sm:block"
       >
-        <ArrowRightIcon className="h-7 w-10"/>
+        <ArrowRightIcon className="h-7 w-10" />
       </button>
       <div
         ref={scrollContainerRef}
-        className="flex overflow-x-auto gap-4 px-6 py-4 scrollbar-hide scroll-smooth  [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']"
+        className="flex overflow-x-auto gap-4 px-6 py-4 scrollbar-hide scroll-smooth
+          [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']"
       >
         {images.map((img, index) => (
           <div
             key={img.id || index}
             target="_blank"
-            className="flex-shrink-0 rounded-lg bg-white cursor-pointer overflow-hidden w-44 h-44 transform hover:scale-110 transition-transform duration-300"
+            className="flex-shrink-0 rounded-lg bg-white cursor-pointer overflow-hidden w-44 h-44 
+            transform hover:scale-110 transition-transform duration-300"
             title={img.action?.text}
           >
             <img
