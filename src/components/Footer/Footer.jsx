@@ -1,4 +1,5 @@
 import React from "react";
+import { FaFacebook, FaInstagram, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -11,6 +12,12 @@ const Footer = () => {
             Serving cravings one bite at a time. Discover, order, and enjoy from
             your favorite restaurants.
           </p>
+          <div className="flex items-center gap-5 mt-4 text-2xl text-gray-800 dark:text-gray-100">
+            <FaFacebook className="hover:text-orange-400 transition cursor-pointer"/>
+            <FaInstagram className="hover:text-orange-400 transition cursor-pointer"/>
+            <FaTwitter className="hover:text-orange-400 transition cursor-pointer"/>
+            <FaLinkedinIn className="hover:text-orange-400 transition cursor-pointer"/>
+          </div>
         </div>
         <div>
           <h3 className="text-lg font-semibold mb-3">Quick Links</h3>

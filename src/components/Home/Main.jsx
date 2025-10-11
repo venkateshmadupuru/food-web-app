@@ -46,9 +46,11 @@ const Main = () => {
   const OnlineStatus = useOnlineStatus();
   if (OnlineStatus === false) {
     return (
-      <h1 className="text-center text-2xl">
+      <div className="flex justify-center items-center min-h-screen dark:text-gray-50">
+      <h1 className="text-3xl text-center">
         Network Error, Please check network connection!!!
       </h1>
+      </div>
     );
   }
   if (listOfRestaurant.length === 0) {

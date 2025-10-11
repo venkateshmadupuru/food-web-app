@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Itemslist from "../Restaurant/Itemslist";
 import { clearCart } from "../../utils/cartslice";
 import { useState } from "react";
+import { MdRemoveShoppingCart } from "react-icons/md";
 
 const Cart = () => {
   const [orderPlaced, setOrderPlaced] = useState(false);
@@ -31,24 +32,28 @@ const Cart = () => {
     const quantity = item.quantity || 1;
     return sum + price * quantity;
   }, 0);
- 
+
   return (
     <div className="w-6/12 m-auto p-4 text-center dark:text-white min-h-screen font-serif">
-      <h1 className="text-2xl text-center font-bold m-4 p-4 dark:">Cart</h1>
+      <h1 className="text-2xl text-center font-bold m-4 p-4">Cart</h1>
 
       {orderPlaced && (
         <>
-        <div className="text-green-500 text-2xl font-semibold mt-4">
-          Order placed Successfully!
-        </div>
+          <div className="text-green-500 text-2xl font-semibold mt-4">
+            Order placed Successfully!
+          </div>
         </>
       )}
       {cartItems.length === 0 && !orderPlaced && (
-        <h1 className="md:text-2xl font-bold text-orange-500 md:m-4 md:p-4 text-xs">
-          Cart is empty.
-          <br className="block md:hidden" />
-          Let’s fill it with something great.
-        </h1>
+        <div className="flex flex-col justify-center items-center text-gray-400 mt-10">
+          <MdRemoveShoppingCart className="text-6xl text-orange-400 mb-3" />
+          <h1 className="text-xl md:text-2xl font-semibold text-orange-500 text-center">
+            Your cart is empty
+          </h1>
+          <p className="text-lg text-gray-500 font-semibold mt-1 dark:text-gray-300">
+            Let’s fill it with something delicious
+          </p>
+        </div>
       )}
       {cartItems.length > 0 && (
         <>

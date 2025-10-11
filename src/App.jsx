@@ -15,16 +15,18 @@ const App = () => {
     } else {
       document.documentElement.classList.remove("dark");
     }
-    const timer=setTimeout(() => setLoading(false), 2000);
-    return ()=> clearTimeout(timer);
+    const timer = setTimeout(() => setLoading(false), 2000);
+    return () => clearTimeout(timer);
   }, [theme]);
 
   return (
     <AuthProvider>
-      <div className="min-h-screen dark:bg-gray-900 dark:text-black">
+      <div className="min-h-screen flex flex-col dark:bg-gray-900 dark:text-black">
         <Header loading={loading} />
-        <Outlet/>
-        <Footer/>
+        <div className="flex-grow">
+          <Outlet />
+        </div>
+        <Footer />
       </div>
     </AuthProvider>
   );
