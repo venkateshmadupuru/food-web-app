@@ -50,6 +50,10 @@ const Browerpath = createBrowserRouter([
     ],
     errorElement: <Error />,
   },
+  {
+    path: "*",
+    element: <Error />,
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
