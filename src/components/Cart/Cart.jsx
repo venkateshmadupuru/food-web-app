@@ -35,7 +35,6 @@ const Cart = () => {
 
   return (
     <div className="w-6/12 m-auto p-4 text-center dark:text-white min-h-screen font-serif">
-      <h1 className="text-2xl text-center font-bold m-4 p-4">Cart</h1>
 
       {orderPlaced && (
         <>
@@ -45,7 +44,7 @@ const Cart = () => {
         </>
       )}
       {cartItems.length === 0 && !orderPlaced && (
-        <div className="flex flex-col justify-center items-center mt-10">
+        <div className="flex flex-col justify-center items-center mt-32">
           <MdRemoveShoppingCart className="text-6xl text-orange-400 mb-3" />
           <h1 className="text-xl md:text-2xl font-semibold text-orange-500 text-center">
             Your cart is empty
