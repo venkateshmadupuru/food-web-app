@@ -5,7 +5,6 @@ import {
   FaLinkedinIn,
   FaTwitter,
 } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import FooterShimmer from "./FooterShimmer";
 
 const Footer = () => {
