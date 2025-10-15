@@ -69,7 +69,7 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-      <div className="border-t border-gray-700 mt-10 pt-6 text-sm text-center text-gray-500">
+      <div className="border-t border-gray-700 mt-10 pt-6 text-sm text-center text-gray-400">
         <p>&copy; {new Date().getFullYear()} BigBite. All rights reserved.</p>
       </div>
     </div>

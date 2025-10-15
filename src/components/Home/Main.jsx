@@ -47,9 +47,9 @@ const Main = () => {
   if (OnlineStatus === false) {
     return (
       <div className="flex justify-center items-center min-h-screen dark:text-gray-50">
-      <h1 className="text-3xl text-center">
-        Network Error, Please check network connection!!!
-      </h1>
+        <h1 className="text-3xl text-center">
+          Network Error, Please check network connection!!!
+        </h1>
       </div>
     );
   }
@@ -72,7 +72,8 @@ const Main = () => {
         <button
           className="px-4 py-3 m-2 border border-orange-400 rounded-full 
           bg-gradient-to-br from-amber-500 via-orange-400 to-orange-600 
-          transform hover:scale-105 transition-transform duration-300 text-black font-bold cursor-pointer"
+          transform hover:scale-105 transition-transform duration-300
+           text-black font-bold cursor-pointer"
           onClick={() => {
             const filteredRestaurant = listOfRestaurant.filter((restaurant) => {
               const name = restaurant?.info?.name?.toLowerCase() || "";
@@ -90,13 +91,15 @@ const Main = () => {
         </button>
       </div>
       <div>
-      {imageGrids.length > 0 && (
-        <div className="my-8">
-          <FoodChoices images={imageGrids} />
-        </div>
-      )}
+        {imageGrids.length > 0 && (
+          <div className="my-8">
+            <FoodChoices images={imageGrids} />
+          </div>
+        )}
       </div>
-      <h3 className="text-gray-900 dark:text-white text-2xl md:text-3xl px-4 mb-4 font-semibold">Top restaurant chains in Bangalore</h3>
+      <h3 className="text-gray-900 dark:text-white text-2xl md:text-3xl px-4 mb-4 font-semibold">
+        Top restaurant chains in Bangalore
+      </h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 p-2 no-underline">
         {filteredRestaurant.map((restaurant) => (
           <Link

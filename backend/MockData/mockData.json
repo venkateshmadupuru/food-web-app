@@ -1,0 +1,1067 @@
+{
+  "status": "OK",
+  "data": {
+    "cards": [
+      {},
+      {},
+      {
+        "card": {
+          "card": {
+            "info": {
+              "id": "999999",
+              "name": "Big Bites",
+              "city": "Bangalore",
+              "slugs": {
+                "restaurant": "swiggy-foods-bangalore",
+                "city": "bangalore"
+              },
+              "uniqueId": "mock-default-999999",
+              "cloudinaryImageId": "RX_THUMBNAIL/IMAGES/VENDOR/2025/10/10/06f4cb1b-7b1b-426d-9914-ce06e808543a_999999.JPG",
+              "locality": "MG Road",
+              "areaName": "MG Road",
+              "costForTwo": "40000",
+              "costForTwoMessage": "₹400 for two",
+              "cuisines": ["Multi-cuisine", "Fast Food", "Desserts"],
+              "avgRating": "4.4",
+              "totalRatingsString": "5K+ ratings"
+            }
+          }
+        }
+      },
+      {},
+      {
+        "groupedCard": {
+          "cardGroupMap": {
+            "REGULAR": {
+              "cards": [
+                {
+                  "card": {
+                    "card": {
+                      "@type": "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
+                      "title": "South Indian Tiffins",
+                      "itemCards": [
+                        {
+                          "card": {
+                            "info": {
+                              "id": "tiffin_101",
+                              "name": "Masala Dosa",
+                              "category": "South Indian Tiffins",
+                              "description": "Crispy rice crepe stuffed with spiced potato, served with sambar & chutney.",
+                              "imageId": "xqew2h4d8ov9e1y2xjdp",
+                              "price": 12000,
+                              "defaultPrice": 12000,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.5",
+                                  "ratingCountV2": "3.1K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "tiffin_102",
+                              "name": "Rava Upma",
+                              "category": "South Indian Tiffins",
+                              "description": "Light and fluffy semolina upma tempered with curry leaves and mustard seeds.",
+                              "imageId": "lpb7ckq0o5fvrhnqzj2n",
+                              "price": 8999,
+                              "defaultPrice": 8999,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.3",
+                                  "ratingCountV2": "1.1K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "tiffin_103",
+                              "name": "Idli (2 pcs)",
+                              "category": "South Indian Tiffins",
+                              "description": "Soft steamed rice cakes served with sambar and coconut chutney.",
+                              "imageId": "afm7qvxk0v5qlsnio8fq",
+                              "price": 6999,
+                              "defaultPrice": 6999,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.2",
+                                  "ratingCountV2": "900+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "tiffin_104",
+                              "name": "Medu Vada (2 pcs)",
+                              "category": "South Indian Tiffins",
+                              "description": "Crispy lentil donuts paired with sambar and coconut chutney.",
+                              "imageId": "yq4kgxwzqrfpmyut1pfn",
+                              "price": 8999,
+                              "defaultPrice": 8999,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.4",
+                                  "ratingCountV2": "1.4K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "tiffin_105",
+                              "name": "Set Dosa Combo",
+                              "category": "South Indian Tiffins",
+                              "description": "Triple set dosa served with sambar, chutney and a small upma.",
+                              "imageId": "xqco0z5qfwz8jvndvpmz",
+                              "price": 15900,
+                              "defaultPrice": 15900,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.6",
+                                  "ratingCountV2": "2K+"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "card": {
+                    "card": {
+                      "@type": "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
+                      "title": "Biryanis & Rice",
+                      "itemCards": [
+                        {
+                          "card": {
+                            "info": {
+                              "id": "biryani_201",
+                              "name": "Hyderabadi Chicken Biryani",
+                              "category": "Biryanis & Rice",
+                              "description": "Aromatic basmati rice layered with spicy marinated chicken, cooked in dum.",
+                              "imageId": "pniw8vt5amajh0xqzn6f",
+                              "price": 25900,
+                              "defaultPrice": 25900,
+                              "isVeg": 0,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.5",
+                                  "ratingCountV2": "6K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "biryani_202",
+                              "name": "Veg Biryani",
+                              "category": "Biryanis & Rice",
+                              "description": "Fragrant basmati cooked with seasonal vegetables and exotic spices.",
+                              "imageId": "qz8f7b2kz8jvnbp4c3ta",
+                              "price": 19900,
+                              "defaultPrice": 19900,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.2",
+                                  "ratingCountV2": "2.5K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "biryani_203",
+                              "name": "Nandhini Special Mutton Biryani",
+                              "category": "Biryanis & Rice",
+                              "description": "Succulent mutton pieces slow-cooked with basmati rice and whole spices.",
+                              "imageId": "s7d9a1bxq3k2pl9m4z7y",
+                              "price": 35900,
+                              "defaultPrice": 35900,
+                              "isVeg": 0,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.6",
+                                  "ratingCountV2": "8K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "biryani_204",
+                              "name": "Egg Biryani",
+                              "category": "Biryanis & Rice",
+                              "description": "Spiced rice layered with boiled eggs and aromatic masala.",
+                              "imageId": "r7x2kq9z0v1bcnl8q3h4",
+                              "price": 18900,
+                              "defaultPrice": 18900,
+                              "isVeg": 0,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.1",
+                                  "ratingCountV2": "700+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "biryani_205",
+                              "name": "Jeera Rice",
+                              "category": "Biryanis & Rice",
+                              "description": "Fragrant cumin-scented basmati rice — perfect with curries.",
+                              "imageId": "c8n2m1v0p7q4r9s3t6u8",
+                              "price": 9900,
+                              "defaultPrice": 9900,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.0",
+                                  "ratingCountV2": "400+"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "card": {
+                    "card": {
+                      "@type": "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
+                      "title": "Pizzas & Pastas",
+                      "itemCards": [
+                        {
+                          "card": {
+                            "info": {
+                              "id": "pizza_301",
+                              "name": "Margherita Pizza (Medium)",
+                              "category": "Pizzas & Pastas",
+                              "description": "Classic pizza with mozzarella, oregano and rich tomato base.",
+                              "imageId": "z9m4k2v6b8q1r3s7t0p4",
+                              "price": 29900,
+                              "defaultPrice": 29900,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.4",
+                                  "ratingCountV2": "5K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "pizza_302",
+                              "name": "Farmhouse Pizza (Large)",
+                              "category": "Pizzas & Pastas",
+                              "description": "Loaded with bell peppers, olives, onions and paneer.",
+                              "imageId": "m2n8k4v6q5r1s3t9u0b7",
+                              "price": 44900,
+                              "defaultPrice": 44900,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.5",
+                                  "ratingCountV2": "6.5K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "pasta_303",
+                              "name": "Creamy Alfredo Pasta",
+                              "category": "Pizzas & Pastas",
+                              "description": "Penne pasta tossed in rich cream and parmesan sauce.",
+                              "imageId": "g3h6j1k9l2p8q4r5s0v7",
+                              "price": 21900,
+                              "defaultPrice": 21900,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.3",
+                                  "ratingCountV2": "2.1K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "pasta_304",
+                              "name": "Chicken Arrabbiata Pasta",
+                              "category": "Pizzas & Pastas",
+                              "description": "Penne in spicy tomato sauce with grilled chicken slices.",
+                              "imageId": "h2j5k8n0p3q6r1s4t9v2",
+                              "price": 24900,
+                              "defaultPrice": 24900,
+                              "isVeg": 0,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.2",
+                                  "ratingCountV2": "1.7K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "pizza_305",
+                              "name": "Cheesy Garlic Bread",
+                              "category": "Pizzas & Pastas",
+                              "description": "Toasted bread topped with garlic butter and generous cheese.",
+                              "imageId": "u9v8w7x6y5z4a3b2c1d0",
+                              "price": 12900,
+                              "defaultPrice": 12900,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.5",
+                                  "ratingCountV2": "3K+"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "card": {
+                    "card": {
+                      "@type": "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
+                      "title": "Burgers & Wraps",
+                      "itemCards": [
+                        {
+                          "card": {
+                            "info": {
+                              "id": "burger_401",
+                              "name": "Classic Veggie Burger",
+                              "category": "Burgers & Wraps",
+                              "description": "Veg patty with lettuce, tomato, and special sauce in sesame bun.",
+                              "imageId": "b4c3d2e1f0g9h8i7j6k5",
+                              "price": 14900,
+                              "defaultPrice": 14900,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.1",
+                                  "ratingCountV2": "2.8K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "burger_402",
+                              "name": "Chicken Zinger Burger",
+                              "category": "Burgers & Wraps",
+                              "description": "Crispy fried chicken fillet with spicy mayo and lettuce.",
+                              "imageId": "c6d7e8f9g1h2j3k4l5m6",
+                              "price": 17900,
+                              "defaultPrice": 17900,
+                              "isVeg": 0,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.3",
+                                  "ratingCountV2": "4K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "wrap_403",
+                              "name": "Paneer Tikka Wrap",
+                              "category": "Burgers & Wraps",
+                              "description": "Soft tortilla filled with paneer tikka, salad and mint chutney.",
+                              "imageId": "d1e2f3g4h5j6k7l8m9n0",
+                              "price": 14900,
+                              "defaultPrice": 14900,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.4",
+                                  "ratingCountV2": "1.9K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "wrap_404",
+                              "name": "Peri Peri Chicken Wrap",
+                              "category": "Burgers & Wraps",
+                              "description": "Grilled chicken tossed in peri peri sauce wrapped in tortilla.",
+                              "imageId": "f9e8d7c6b5a4z3x2c1v0",
+                              "price": 16900,
+                              "defaultPrice": 16900,
+                              "isVeg": 0,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.2",
+                                  "ratingCountV2": "1.1K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "burger_405",
+                              "name": "Double Cheese Burger",
+                              "category": "Burgers & Wraps",
+                              "description": "Two juicy patties with double cheese, pickles and special sauce.",
+                              "imageId": "z3x2c1v0b9n8m7l6k5j4",
+                              "price": 19900,
+                              "defaultPrice": 19900,
+                              "isVeg": 0,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.0",
+                                  "ratingCountV2": "2.3K+"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "card": {
+                    "card": {
+                      "@type": "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
+                      "title": "Snacks & Starters",
+                      "itemCards": [
+                        {
+                          "card": {
+                            "info": {
+                              "id": "snack_501",
+                              "name": "Veg Spring Rolls (4 pcs)",
+                              "category": "Snacks & Starters",
+                              "description": "Crispy rolls stuffed with mixed vegetables served with sweet chili sauce.",
+                              "imageId": "r4s5t6u7v8w9x0y1z2a3",
+                              "price": 13900,
+                              "defaultPrice": 13900,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.1",
+                                  "ratingCountV2": "1.2K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "snack_502",
+                              "name": "Chicken 65",
+                              "category": "Snacks & Starters",
+                              "description": "Deep fried spicy chicken tossed with curry leaves and spices.",
+                              "imageId": "v7w8x9y0z1a2b3c4d5e6",
+                              "price": 17900,
+                              "defaultPrice": 17900,
+                              "isVeg": 0,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.4",
+                                  "ratingCountV2": "3.4K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "snack_503",
+                              "name": "Paneer 65",
+                              "category": "Snacks & Starters",
+                              "description": "Crispy paneer cubes tossed in spicy batter and curry leaves.",
+                              "imageId": "g7h8j9k0l1m2n3o4p5q6",
+                              "price": 15900,
+                              "defaultPrice": 15900,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.5",
+                                  "ratingCountV2": "1.8K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "snack_504",
+                              "name": "Masala Fries",
+                              "category": "Snacks & Starters",
+                              "description": "Crispy fries tossed with special masala and herbs.",
+                              "imageId": "h7i8j9k0l1m2n3o4p5q6",
+                              "price": 10900,
+                              "defaultPrice": 10900,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.2",
+                                  "ratingCountV2": "2.7K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "snack_505",
+                              "name": "Chicken Popcorn",
+                              "category": "Snacks & Starters",
+                              "description": "Bite-sized chicken pieces fried and tossed in a tangy glaze.",
+                              "imageId": "i7j8k9l0m1n2o3p4q5r6",
+                              "price": 16900,
+                              "defaultPrice": 16900,
+                              "isVeg": 0,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.3",
+                                  "ratingCountV2": "1.4K+"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "card": {
+                    "card": {
+                      "@type": "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
+                      "title": "Chicken Buckets & Meals",
+                      "itemCards": [
+                        {
+                          "card": {
+                            "info": {
+                              "id": "bucket_601",
+                              "name": "6 Pc Chicken Bucket",
+                              "category": "Chicken Buckets & Meals",
+                              "description": "Crispy fried chicken bucket served with fries and dip.",
+                              "imageId": "k1l2m3n4o5p6q7r8s9t0",
+                              "price": 49900,
+                              "defaultPrice": 49900,
+                              "isVeg": 0,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.5",
+                                  "ratingCountV2": "7K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "meal_602",
+                              "name": "Chicken Meal for One",
+                              "category": "Chicken Buckets & Meals",
+                              "description": "Fried chicken piece, rice, coleslaw and a drink.",
+                              "imageId": "l1m2n3o4p5q6r7s8t9u0",
+                              "price": 21900,
+                              "defaultPrice": 21900,
+                              "isVeg": 0,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.3",
+                                  "ratingCountV2": "3K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "meal_603",
+                              "name": "Veg Meal for One",
+                              "category": "Chicken Buckets & Meals",
+                              "description": "Veg patty, rice, salad and a beverage.",
+                              "imageId": "m1n2o3p4q5r6s7t8u9v0",
+                              "price": 17900,
+                              "defaultPrice": 17900,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.0",
+                                  "ratingCountV2": "1.2K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "bucket_604",
+                              "name": "Family Bucket (10 Pc)",
+                              "category": "Chicken Buckets & Meals",
+                              "description": "Large crispy chicken bucket ideal for families, served with fries.",
+                              "imageId": "n1o2p3q4r5s6t7u8v9w0",
+                              "price": 89900,
+                              "defaultPrice": 89900,
+                              "isVeg": 0,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.6",
+                                  "ratingCountV2": "9K+"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "card": {
+                    "card": {
+                      "@type": "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
+                      "title": "Desserts & Cakes",
+                      "itemCards": [
+                        {
+                          "card": {
+                            "info": {
+                              "id": "dessert_701",
+                              "name": "Chocolate Brownie with Ice Cream",
+                              "category": "Desserts & Cakes",
+                              "description": "Warm gooey brownie served with vanilla ice cream.",
+                              "imageId": "xqco0z5qfwz8jvndvpmz",
+                              "price": 15900,
+                              "defaultPrice": 15900,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.7",
+                                  "ratingCountV2": "4.4K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "dessert_702",
+                              "name": "Gulab Jamun (2 pcs)",
+                              "category": "Desserts & Cakes",
+                              "description": "Soft milk-based dumplings soaked in sugar syrup.",
+                              "imageId": "q1w2e3r4t5y6u7i8o9p0",
+                              "price": 9900,
+                              "defaultPrice": 9900,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.5",
+                                  "ratingCountV2": "3K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "dessert_703",
+                              "name": "Red Velvet Cake Slice",
+                              "category": "Desserts & Cakes",
+                              "description": "Cream cheese frosting on a soft red velvet sponge.",
+                              "imageId": "s1d2f3g4h5j6k7l8p9o0",
+                              "price": 24900,
+                              "defaultPrice": 24900,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.6",
+                                  "ratingCountV2": "2.9K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "dessert_704",
+                              "name": "Classic Tiramisu",
+                              "category": "Desserts & Cakes",
+                              "description": "Layered coffee-flavoured Italian dessert with mascarpone.",
+                              "imageId": "a1s2d3f4g5h6j7k8l9z0",
+                              "price": 27900,
+                              "defaultPrice": 27900,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.7",
+                                  "ratingCountV2": "1.6K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "dessert_705",
+                              "name": "Classic Cheesecake",
+                              "category": "Desserts & Cakes",
+                              "description": "Creamy and smooth New York style cheesecake.",
+                              "imageId": "b1n2m3v4c5x6z7a8s9d0",
+                              "price": 29900,
+                              "defaultPrice": 29900,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.6",
+                                  "ratingCountV2": "2.1K+"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "card": {
+                    "card": {
+                      "@type": "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
+                      "title": "Ice Creams & Sundaes",
+                      "itemCards": [
+                        {
+                          "card": {
+                            "info": {
+                              "id": "ice_801",
+                              "name": "Vanilla Scoop",
+                              "category": "Ice Creams & Sundaes",
+                              "description": "Classic vanilla ice cream scoop.",
+                              "imageId": "v1c2b3n4m5a6s7d8f9g0",
+                              "price": 7999,
+                              "defaultPrice": 7999,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.3",
+                                  "ratingCountV2": "1K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "ice_802",
+                              "name": "Chocolate Fudge Sundae",
+                              "category": "Ice Creams & Sundaes",
+                              "description": "Chocolate ice cream topped with fudge and nuts.",
+                              "imageId": "z1x2c3v4b5n6m7a8s9d0",
+                              "price": 12900,
+                              "defaultPrice": 12900,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.5",
+                                  "ratingCountV2": "1.8K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "ice_803",
+                              "name": "Kulfi Falooda",
+                              "category": "Ice Creams & Sundaes",
+                              "description": "Traditional Indian kulfi with rose falooda and rabri.",
+                              "imageId": "n9m8b7v6c5x4z3a2s1d0",
+                              "price": 15900,
+                              "defaultPrice": 15900,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.6",
+                                  "ratingCountV2": "2.2K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "ice_804",
+                              "name": "Strawberry Scoop",
+                              "category": "Ice Creams & Sundaes",
+                              "description": "Fresh strawberry flavored creamy scoop.",
+                              "imageId": "m8n7b6v5c4x3z2a1s0d9",
+                              "price": 7999,
+                              "defaultPrice": 7999,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.2",
+                                  "ratingCountV2": "700+"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "card": {
+                    "card": {
+                      "@type": "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
+                      "title": "Beverages & Shakes",
+                      "itemCards": [
+                        {
+                          "card": {
+                            "info": {
+                              "id": "bev_901",
+                              "name": "Cold Coffee",
+                              "category": "Beverages & Shakes",
+                              "description": "Iced cold coffee topped with cream.",
+                              "imageId": "f1e2d3c4b5a697887766",
+                              "price": 11900,
+                              "defaultPrice": 11900,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.3",
+                                  "ratingCountV2": "2.4K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "bev_902",
+                              "name": "Mango Lassi",
+                              "category": "Beverages & Shakes",
+                              "description": "Creamy mango lassi made with fresh mango pulp.",
+                              "imageId": "g2h3j4k5l6m7n8o9p0q1",
+                              "price": 9999,
+                              "defaultPrice": 9999,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.5",
+                                  "ratingCountV2": "1.3K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "bev_903",
+                              "name": "Chocolate Shake",
+                              "category": "Beverages & Shakes",
+                              "description": "Rich chocolate shake topped with choco chips.",
+                              "imageId": "h2g3f4d5s6a7q8w9e0r1",
+                              "price": 12900,
+                              "defaultPrice": 12900,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.4",
+                                  "ratingCountV2": "1.6K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "bev_904",
+                              "name": "Masala Chai",
+                              "category": "Beverages & Shakes",
+                              "description": "Traditional Indian masala tea brewed with spices.",
+                              "imageId": "s3d4f5g6h7j8k9l0p1o2",
+                              "price": 4999,
+                              "defaultPrice": 4999,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.1",
+                                  "ratingCountV2": "900+"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "card": {
+                    "card": {
+                      "@type": "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
+                      "title": "Combos & Family Meals",
+                      "itemCards": [
+                        {
+                          "card": {
+                            "info": {
+                              "id": "combo_1001",
+                              "name": "Family Feast (4 pax)",
+                              "category": "Combos & Family Meals",
+                              "description": "A mix of biryani, starters, dessert and beverages for a family of 4.",
+                              "imageId": "t1r2e3w4q5y6u7i8o9p0",
+                              "price": 89900,
+                              "defaultPrice": 89900,
+                              "isVeg": 0,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.6",
+                                  "ratingCountV2": "2.5K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "combo_1002",
+                              "name": "Couple Combo",
+                              "category": "Combos & Family Meals",
+                              "description": "Two mains with two beverages and one dessert.",
+                              "imageId": "u1i2o3p4a5s6d7f8g9h0",
+                              "price": 39900,
+                              "defaultPrice": 39900,
+                              "isVeg": 0,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.4",
+                                  "ratingCountV2": "1.8K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "combo_1003",
+                              "name": "Meal for One (Biryani + Drink)",
+                              "category": "Combos & Family Meals",
+                              "description": "Single biryani with a beverage — great value meal.",
+                              "imageId": "p0o9i8u7y6t5r4e3w2q1",
+                              "price": 21900,
+                              "defaultPrice": 21900,
+                              "isVeg": 0,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.2",
+                                  "ratingCountV2": "1.1K+"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "card": {
+                            "info": {
+                              "id": "combo_1004",
+                              "name": "Veg Family Pack",
+                              "category": "Combos & Family Meals",
+                              "description": "Multiple veg mains, rice, sides and dessert for family.",
+                              "imageId": "o9i8u7y6t5r4e3w2q1p0",
+                              "price": 74900,
+                              "defaultPrice": 74900,
+                              "isVeg": 1,
+                              "ratings": {
+                                "aggregatedRating": {
+                                  "rating": "4.5",
+                                  "ratingCountV2": "900+"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  },
+  "tid": "mock-tid-0001",
+  "sid": "mock-sid-0001",
+  "deviceId": "mock-device-0001"
+}
