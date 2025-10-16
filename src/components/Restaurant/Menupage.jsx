@@ -9,8 +9,20 @@ const Menupage = () => {
   const [showIndex, setShowIndex] = useState(null);
 
   if (loading) return <RestaurantCategoryShimmer />;
-  if (!hotelPage) return <div>No menu data available</div>;
-  if (error) return <div>No Menu data available</div>;
+
+  if (!hotelPage)
+    return (
+      <div className="flex justify-center items-center min-h-[50vh] text-gray-900 dark:text-gray-200 text-2xl font-semibold">
+        No menu data available!
+      </div>
+    );
+  if (error)
+    return (
+      <div className="flex justify-center items-center min-h-[50vh] text-red-500 dark:text-gray-200 text-2xl font-semibold">
+        Something went wrong! Please try again later.
+      </div>
+    );
+
   const { city, costForTwoMessage, name } =
     hotelPage?.data?.cards?.[2]?.card?.card?.info || {};
 
