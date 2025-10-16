@@ -10,9 +10,9 @@ const useMenuPage = (resId) => {
     if (!resId) return;
     const fetchmenu = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:5000/api/menu?resId=${resId}`
-        );
+        const API_BASE_URL =
+          process.env.REACT_APP_API_URL || "http://localhost:5000";
+        const response = await fetch(`${API_BASE_URL}/api/menu?resId=${resId}`);
         const data = await response.json();
         sethotelPage(data);
       } catch (error) {
