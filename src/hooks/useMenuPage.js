@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import { MENU_URL } from "../utils/constants";
 
 const useMenuPage = (resId) => {
   const [hotelPage, sethotelPage] = useState(null);
