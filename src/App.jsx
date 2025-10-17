@@ -21,7 +21,7 @@ const App = () => {
 
   return (
     <AuthProvider>
-      <div className="min-h-screen flex flex-col dark:bg-gray-900 dark:text-black">
+      <div className="min-h-screen flex flex-col dark:bg-gray-900 dark:text-white">
         <Header loading={loading} />
         <div className="flex-grow">
           <Outlet />

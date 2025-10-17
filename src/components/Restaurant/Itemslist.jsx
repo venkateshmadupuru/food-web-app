@@ -12,7 +12,7 @@ const Itemslist = ({ items, isCart = false }) => {
     dispatch(removeItem(item.card.info.id));
   };
   return (
-    <div className="dark:bg-gray-800 dark:text-white dark:rounded-md bg-gray-100">
+    <div className="dark:bg-gray-800 dark:text-white rounded-lg bg-gray-100">
       {items.map((item) => (
         <div
           key={item.card.info.id}
