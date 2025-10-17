@@ -9,7 +9,7 @@
           "card": {
             "info": {
               "id": "999999",
-              "name": "Big Bites",
+              "name": "Menu",
               "city": "Bangalore",
               "slugs": {
                 "restaurant": "swiggy-foods-bangalore",

@@ -47,30 +47,9 @@ app.get("/api/restaurants", async (req, res) => {
 });
 
 app.get("/api/menu", async (req, res) => {
-  const { resId, name } = req.query;
+  const { resId} = req.query;
 
   try {
-    const mockPathById = path.resolve(
-      __dirname,
-      `./MockData/menu_${resId}.json`
-    );
-    if (fs.existsSync(mockPathById)) {
-      const mockData = JSON.parse(fs.readFileSync(mockPathById, "utf-8"));
-      return res.json(mockData);
-    }
-
-    if (name) {
-      const normalizedName = name.toLowerCase().replace(/\s+/g, "-");
-      const mockPathByName = path.resolve(
-        __dirname,
-        `./MockData/menu_${normalizedName}.json`
-      );
-      if (fs.existsSync(mockPathByName)) {
-        const mockData = JSON.parse(fs.readFileSync(mockPathByName, "utf-8"));
-        return res.json(mockData);
-      }
-    }
-
     if (resId) {
       try {
         const liveUrl = `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9716&lng=77.5946&restaurantId=${resId}`;
