@@ -3,6 +3,8 @@ import { BANNER_IMAGE, LOGO_URL } from "../../utils/constants";
 import { useForm } from "react-hook-form";
 import { auth } from "../../utils/firebase";
 import { sendPasswordResetEmail } from "firebase/auth";
+import { Link } from "react-router-dom";
+import { IoArrowBack } from "react-icons/io5";
 
 const getFriendlyError = (code) => {
   switch (code) {
@@ -84,6 +86,11 @@ const PasswordReset = () => {
           {loading ? "Sending..." : "Send Reset Link"}
         </button>
         {message && <p className="text-green-400 my-1 ">{message}</p>}
+        <div className="flex justify-between mt-5">
+          <Link to="/" className="text-md font-semibold text-orange-500 hover:underline">
+            <IoArrowBack className="w-5 h-5 inline-block mr-1" /> Back to Login
+          </Link>
+        </div>
       </form>
     </div>
   );
