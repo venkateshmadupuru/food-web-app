@@ -1,21 +1,22 @@
 .shimmer {
-  background-image: linear-gradient(
+    background: linear-gradient(
     to right,
-    rgba(234, 229, 229, 0.6) 0%,
+    rgba(241, 240, 240, 0.6) 0%,
     rgba(245, 245, 245, 0.8) 50%,
-    rgba(234, 229, 229, 0.6) 100%
+    rgba(238, 236, 234, 0.6) 100%
   );
   background-size: 1000px 100%;
-  background-repeat: no-repeat;
-  background-position: -1000px 0;
-  animation: effect 3s ease-in-out infinite;
+  animation: effect 2s ease-in-out infinite alternate;
 }
 
 @keyframes effect {
   0% {
-    background-position: -1000px 0;
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 1;
   }
   100% {
-    background-position: 1000px 0;
+    opacity: 0.9;
   }
 }
