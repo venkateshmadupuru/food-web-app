@@ -11,6 +11,7 @@ import ProtectedRoute from "./components/Auth/ProtectedRoute";
 import PasswordReset from "./components/Auth/PasswordReset";
 import RestaurantCategoryShimmer from "./components/Restaurant/RestaurantCategoryShimmer";
 import Main from "./components/Home/Main";
+import AuthProvider from "./components/Auth/AuthProvider";
 
 const Menupage = lazy(() => import("./components/Restaurant/Menupage"));
 
@@ -59,6 +60,8 @@ const Browerpath = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={appstore}>
+    <AuthProvider>
     <RouterProvider router={Browerpath} />
+    </AuthProvider>
   </Provider>
 );
