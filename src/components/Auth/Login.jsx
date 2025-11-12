@@ -7,7 +7,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../../utils/firebase";
-import { useDispatch } from "react-redux";
+import { useDispatch} from "react-redux";
 import { addUser } from "../../utils/userSlice";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -38,13 +38,24 @@ const Login = () => {
         );
         // Signed up
         const user = userCredential.user;
+        const avatarURL = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+          `${firstName} ${lastName}`
+        )}&background=6b7280&color=fff&bold=true&size=128&length=2&v=${Date.now()}`;
         await updateProfile(user, {
           displayName: `${firstName} ${lastName}`,
-          photoURL: "https://ui-avatars.com/api/?name=First+Last",
+          photoURL: avatarURL,
         });
         // Profile updated!
-        const { uid, email, displayName, photoURL } = auth.currentUser;
-        dispatch(addUser({ uid, email, displayName, photoURL }));
+        await user.reload();
+        const updatedUser = auth.currentUser;
+        dispatch(
+          addUser({
+            uid: updatedUser.uid,
+            email: updatedUser.email,
+            displayName: updatedUser.displayName,
+            photoURL: updatedUser.photoURL,
+          })
+        );
         navigate("/app", { replace: true });
       }
     } catch (error) {

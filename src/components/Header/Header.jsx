@@ -70,23 +70,23 @@ const Header = ({ loading }) => {
             <Link to="">
               <HomeIcon className="h-7 w-7" />
             </Link>
-             <span
-                className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-max px-2 py-1 bg-gray-800
+            <span
+              className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-max px-2 py-1 bg-gray-800
                text-white dark:text-gray-900 dark:bg-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity"
-              >
-                Home
-              </span>
+            >
+              Home
+            </span>
           </li>
           <li className="relative group pr-2 font-bold transition duration-300 ease-in-out hover:scale-110 hover:text-orange-400">
             <Link to="cart" className="flex items-center space-x-1">
               <CartIcon count={cartItems.length} />
             </Link>
             <span
-                className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-max px-2 py-1 bg-gray-800
+              className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-max px-2 py-1 bg-gray-800
                text-white dark:text-gray-900 dark:bg-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity"
-              >
-                Cart
-              </span>
+            >
+              Cart
+            </span>
           </li>
           <li className="relative group">
             <button onClick={handleTheme} className="m-3 cursor-pointer">
@@ -109,8 +109,16 @@ const Header = ({ loading }) => {
             onFocus={() => setIsDropDown(true)}
             onBlur={() => setIsDropDown(false)}
           >
-            <UserCircleIcon className="h-7 w-7 cursor-pointer" />
-            
+            {user?.photoURL ? (
+              <img
+                src={user.photoURL}
+                alt={user.displayName || "User"}
+                className="h-8 w-8 rounded-full cursor-pointer object-cover border-2 border-orange-500"
+              />
+            ) : (
+              <UserCircleIcon className="h-7 w-7 cursor-pointer" />
+            )}
+
             {isDropDown && (
               <div className=" absolute right-4 w-40 bg-white text-black dark:bg-gray-800 dark:text-white text-sm rounded-lg shadow-lg border-2 border-orange-600">
                 <div className="px-4 py-4 border-b border-black dark:border-white">
