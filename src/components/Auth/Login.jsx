@@ -88,7 +88,7 @@ const Login = () => {
       </div>
       <form
         onSubmit={handleSubmit(formSubmit)}
-        className="absolute bg-black/70 md:w-3/12 text-white md:mx-auto md:mb-1 m-5 right-0 left-0 p-12 my-28 rounded-xl z-10"
+        className="absolute bg-black/70 md:w-3/12 text-white md:mx-auto md:mb-1 m-5 right-0 left-0 p-12 my-28 rounded-2xl z-10"
       >
         <h1 className="text-2xl font-bold">
           {showSignInForm ? "Sign In" : "Sign Up"}
@@ -98,7 +98,7 @@ const Login = () => {
             <input
               type="text"
               placeholder="FirstName"
-              className="p-4 my-4 w-full rounded-lg bg-gray-700 focus:outline focus:outline-rose-400"
+              className="p-4 my-4 w-full rounded-lg bg-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-500"
               {...register("firstName", {
                 required: "FirstName is Required",
                 minLength: {
@@ -113,7 +113,7 @@ const Login = () => {
             <input
               type="text"
               placeholder="LastName"
-              className="p-4 my-4 w-full rounded-lg bg-gray-700 focus:outline focus:outline-rose-400"
+              className="p-4 my-4 w-full rounded-lg bg-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-500"
               {...register("lastName", {
                 required: "LastName is Required",
                 minLength: {
@@ -130,7 +130,7 @@ const Login = () => {
         <input
           type="text"
           placeholder="Email"
-          className="p-4 my-4 w-full rounded-lg bg-gray-700 focus:outline focus:outline-rose-400"
+          className="p-4 my-4 w-full rounded-lg bg-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-500"
           {...register("email", {
             required: "Email is required",
             pattern: {
@@ -145,7 +145,7 @@ const Login = () => {
         <input
           type="password"
           placeholder="Password"
-          className="p-4 my-4 w-full rounded-lg bg-gray-700 focus:outline focus:outline-rose-400"
+          className="p-4 my-4 w-full rounded-lg bg-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-500"
           {...register("password", {
             required: "Password is required",
             minLength: {
@@ -174,7 +174,7 @@ const Login = () => {
           {showSignInForm ? "New User? Sign Up" : "Already have an account?"}
         </span>
         <Link to="/password-reset">
-          <p className="font-xl mt-4 font-semibold hover:underline cursor-pointer">
+          <p className="font-xl mt-4 font-semibold hover:text-orange-200 cursor-pointer">
             Forgot password?
           </p>
         </Link>

@@ -66,7 +66,7 @@ const PasswordReset = () => {
       >
         <h2 className="font-semibold text-xl mb-3">Reset Your Password</h2>
         <input
-          className="p-3 rounded-lg w-full text-black"
+          className="p-4 my-4 w-full rounded-lg bg-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-500"
           type="email"
           placeholder="Enter your email"
           {...register("email", {
@@ -81,13 +81,13 @@ const PasswordReset = () => {
         <button
           type="submit"
           disabled={loading}
-          className="bg-white text-lg font-bold text-orange-500 p-3 mt-5 w-full rounded-lg"
+          className="bg-white text-lg font-bold text-orange-500 p-3 mt-5 w-full rounded-lg hover:bg-gray-200 disabled:opacity-50"
         >
           {loading ? "Sending..." : "Send Reset Link"}
         </button>
         {message && <p className="text-green-400 my-1 ">{message}</p>}
         <div className="flex justify-between mt-5">
-          <Link to="/" className="text-md font-semibold text-orange-500 hover:underline">
+          <Link to="/" className="text-md font-semibold text-orange-500 hover:opacity-80">
             <IoArrowBack className="w-5 h-5 inline-block mr-1" /> Back to Login
           </Link>
         </div>
