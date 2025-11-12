@@ -15,8 +15,8 @@ const Main = () => {
   useEffect(() => {
     const fetchedData = async () => {
       try {
-        
-        const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+        const API_BASE_URL =
+          process.env.REACT_APP_API_URL || "http://localhost:5000";
         const response = await fetch(`${API_BASE_URL}/api/restaurants`);
 
         if (!response.ok) throw new Error("Failed to fetch data");
@@ -64,7 +64,9 @@ const Main = () => {
         <input
           type="text"
           data-testid="searchInput"
-          className="m-2 p-3 md:text-lg border border-orange-900 rounded-full w-1/2 pl-4 text-md"
+          className="m-2 p-3 md:text-lg border border-gray-400 rounded-full w-1/2 pl-4 text-md
+             focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500
+             transition-all duration-300 ease-in-out"
           placeholder="Search for restaurants, cuisines..."
           value={searchText}
           onChange={(e) => {
@@ -74,7 +76,7 @@ const Main = () => {
         <button
           className="px-4 py-3 m-2 border border-orange-400 rounded-full 
           bg-gradient-to-br from-amber-500 via-orange-400 to-orange-600 
-          transform hover:scale-105 transition-transform duration-300
+          transform hover:brightness-110 transition-transform duration-300
            text-black font-bold cursor-pointer"
           onClick={() => {
             const filteredRestaurant = listOfRestaurant.filter((restaurant) => {
