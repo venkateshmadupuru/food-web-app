@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { addItem, removeItem } from "../../utils/cartslice";
-import { CDN_URL } from "../../utils/constants";
+import { getMenuImage } from "../../utils/getMenuImage";
 
 const Itemslist = ({ items, isCart = false }) => {
   const dispatch = useDispatch();
@@ -51,9 +51,10 @@ const Itemslist = ({ items, isCart = false }) => {
               )}
             </div>
             <img
-              src={CDN_URL + item.card.info.imageId}
+              src={getMenuImage(item.card.info)}
               className="md:w-full w-52 rounded-lg"
-              alt="restaurantimage"
+              alt={item.card.info.name}
+              loading="lazy"
             />
           </div>
         </div>
