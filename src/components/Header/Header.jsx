@@ -53,16 +53,14 @@ const Header = ({ loading }) => {
           alt="brand-logo"
         />
       </div>
-      <div>
-        <h1
-          className="text-3xl text-center font-extrabold bg-gradient-to-br from-orange-400
-         to-yellow-500 bg-clip-text text-transparent hidden md:block"
-        >
-          Welcome to BigBite
-          <span className="bg-gradient-to-tr from-rose-400 bg-clip-text text-transparent ml-1">
-            {user ? user.displayName : "Foodie"}
-          </span>
+
+      <div className="text-center flex-1">
+        <h1 className="text-3xl font-extrabold bg-gradient-to-br from-orange-400 to-yellow-500 bg-clip-text text-transparent">
+          BigBite
         </h1>
+        <p className="text-sm text-gray-500 dark:text-gray-300 italic">
+          Big Bite’s Food at lightning speed
+        </p>
       </div>
       <div>
         <ul className=" flex justify-center items-center text-xl px-3">
