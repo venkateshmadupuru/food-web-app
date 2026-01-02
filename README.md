@@ -1,4 +1,4 @@
-# 🍔 BigBite – Food Ordering Web App
+ 🍔 BigBite – Food Ordering Web App
 BigBite is a Swiggy-inspired food ordering web application built with **React**, **Redux Toolkit**, and **Tailwind CSS**.  
 The app allows users to browse restaurants, view menus, manage their cart, and place orders. User authentication is handled via **Firebase Auth**, and the app uses mock data to simulate API responses, with fallback to live Swiggy API where possible.
 ---
@@ -82,10 +82,10 @@ The app allows users to browse restaurants, view menus, manage their cart, and p
 4. **Open in Browser**
    Navigate to `http://localhost:3000` to view the application.
 --- 
-## 🤝 Contributing
+ 🤝 Contributing
 Contributions are welcome! Please fork the repository and create a pull request with your changes.
 ---
-## 📄 License
+ 📄 License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 ---
 ## 🙏 Acknowledgements
