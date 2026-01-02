@@ -90,11 +90,17 @@ User authentication is handled via **Firebase Auth**, and the app uses mock data
    Navigate to `http://localhost:3000` to view the application.
 --- 
 ## 🤝 Contributing
+
 Contributions are welcome! Please fork the repository and create a pull request with your changes.
+
 ---
+
 ## 📄 License
+
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
 ---
+
 ## 🙏 Acknowledgements
 - Swiggy for their public API
 - React, Redux Toolkit, and Tailwind CSS communities for their amazing tools and resources
