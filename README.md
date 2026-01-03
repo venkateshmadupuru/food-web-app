@@ -102,8 +102,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ---
 
 ## 🙏 Acknowledgements
-- Swiggy for their public API
-- React, Redux Toolkit, and Tailwind CSS communities for their amazing tools and resources
-- Inspiration from various open-source food ordering applications
-- Feel free to reach out for any questions or suggestions!
-- Happy Coding! 🍕🍔🍣
+- Swiggy public API for restaurant and menu data
+- React, Redux Toolkit, and Tailwind CSS communities
