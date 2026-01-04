@@ -44,13 +44,14 @@ const PasswordReset = () => {
   };
 
   return (
-    <div>
-      <div>
+    <div className="font-serif min-h-screen overflow-hidden">
+      <div className="relative flex">
         <img
-          className="w-20 h-20 absolute bg-orange-600 z-50 m-5 rounded-full p-1"
+          className="w-14 h-14 absolute bg-orange-600 z-50 m-5 rounded-full p-1"
           src={LOGO_URL}
           alt="brand-logo"
         />
+        <h1 className="flex-1 text-center text-4xl font-bold text-orange-500 mt-8 hover:scale-105 transition-transform cursor-pointer">BigBite</h1>
       </div>
       <div className="fixed inset-0 -z-10">
         <img
