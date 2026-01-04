@@ -70,6 +70,11 @@ User authentication is handled via **Firebase Auth**, and the app uses mock data
 ```
 ## 🔧 Installation & Setup
 
+### Pre-requisites:
+- Node.js (v16 or higher)
+- Yarn (package manager)
+- Git
+
 1. **Clone the Repository**
    ```bash
    git clone https://github.com/venkateshmadupuru/food-web-app.git
