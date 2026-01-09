@@ -7,7 +7,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../../utils/firebase";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { addUser } from "../../utils/userSlice";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -77,7 +77,9 @@ const Login = () => {
           src={LOGO_URL}
           alt="BigBite Logo"
         />
-        <h1 className="flex-1 text-center text-4xl font-bold text-orange-500 mt-8 hover:scale-105 transition-transform cursor-pointer">BigBite</h1>
+        <h1 className="flex-1 text-center text-4xl font-bold text-orange-500 mt-8 hover:scale-105 transition-transform cursor-pointer">
+          BigBite
+        </h1>
       </div>
       <div className="fixed inset-0 -z-10">
         <img
@@ -89,7 +91,7 @@ const Login = () => {
       </div>
       <form
         onSubmit={handleSubmit(formSubmit)}
-        className="absolute bg-black/70 md:w-3/12 text-white md:mx-auto md:mb-1 m-5 right-0 left-0 p-12 my-28 rounded-2xl z-10"
+        className="absolute bg-black/70 md:w-3/12 text-white md:mx-auto my-14 m-5 right-0 left-0 md:p-12 p-6 rounded-2xl z-10"
       >
         <h1 className="text-2xl font-bold">
           {showSignInForm ? "Sign In" : "Sign Up"}
@@ -175,9 +177,11 @@ const Login = () => {
           {showSignInForm ? "New User? Sign Up" : "Already have an account?"}
         </span>
         <Link to="/password-reset">
-          <p className="font-xl mt-4 font-semibold hover:text-orange-200 cursor-pointer">
-            Forgot password?
-          </p>
+          {showSignInForm && (
+            <p className="font-xl mt-4 font-semibold hover:text-orange-200 cursor-pointer">
+              Forgot password?
+            </p>
+          )}
         </Link>
       </form>
     </div>
