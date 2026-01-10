@@ -47,7 +47,7 @@ const Header = ({ loading }) => {
     <div className="flex justify-between items-center shadow-md dark:bg-gray-800 dark:text-white font-serif">
       <div>
         <img
-          className="logo w-16 h-16 bg-orange-600 m-3 rounded-full p-1 
+          className="logo md:w-14 md:h-14 w-10 h-10 bg-orange-600 m-3 rounded-full p-1 
           hover:scale-105 transition-transform duration-300"
           src={LOGO_URL}
           alt="brand-logo"
@@ -55,10 +55,10 @@ const Header = ({ loading }) => {
       </div>
 
       <div className="text-center flex-1">
-        <h1 className="text-3xl font-extrabold bg-gradient-to-br from-orange-400 to-yellow-500 bg-clip-text text-transparent">
+        <h1 className="md:block hidden text-3xl  font-extrabold bg-gradient-to-br from-orange-400 to-yellow-500 bg-clip-text text-transparent">
           BigBite
         </h1>
-        <p className="text-sm text-gray-500 dark:text-gray-300 italic">
+        <p className="text-sm text-gray-500 dark:text-gray-300 italic md:block hidden">
           Big Bite’s Food at lightning speed
         </p>
       </div>
@@ -118,7 +118,7 @@ const Header = ({ loading }) => {
             )}
 
             {isDropDown && (
-              <div className=" absolute right-4 w-40 bg-white text-black dark:bg-gray-800 dark:text-white text-sm rounded-lg shadow-lg border-2 border-orange-600">
+              <div className=" absolute z-10 right-4 w-40 bg-white text-black dark:bg-gray-800 dark:text-white text-sm rounded-lg shadow-lg border-2 border-orange-600">
                 <div className="px-4 py-4 border-b border-black dark:border-white">
                   <p className="font-semibold truncate">
                     {user?.displayName || "User"}
