@@ -5,8 +5,8 @@ const Shimmer = () => {
     <div>
       {/* Search Filters Shimmer */}
       <div className="flex flex-wrap justify-center mx-auto my-5 gap-3">
-        <div className="shimmer w-1/2 h-12 rounded-full"></div>
-        <div className="shimmer w-24 h-12 rounded-full"></div>
+        <div className="shimmer w-1/2 md:h-12 h-8 rounded-full"></div>
+        <div className="shimmer md:w-24 w-8 md:h-12 h-8 rounded-full"></div>
       </div>
       {/* Food Choices Carousel Shimmer */}
       <FoodChoiceShimmer />
