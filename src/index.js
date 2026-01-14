@@ -18,18 +18,8 @@ const Menupage = lazy(() => import("./components/Restaurant/Menupage"));
 const Browerpath = createBrowserRouter([
   {
     path: "/",
-    element: <Login />,
-  },
-  {
-    path: "/password-reset",
-    element: <PasswordReset />,
-  },
-  {
-    path: "/app",
     element: (
-      <ProtectedRoute>
         <App />
-      </ProtectedRoute>
     ),
     children: [
       {
@@ -46,10 +36,21 @@ const Browerpath = createBrowserRouter([
       },
       {
         path: "cart",
-        element: <Cart />,
+        element: (
+        <ProtectedRoute>
+        <Cart />
+      </ProtectedRoute>),
       },
     ],
     errorElement: <Error />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/password-reset",
+    element: <PasswordReset />,
   },
   {
     path: "*",
@@ -61,7 +62,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={appstore}>
     <AuthProvider>
-    <RouterProvider router={Browerpath} />
+      <RouterProvider router={Browerpath} />
     </AuthProvider>
   </Provider>
 );
