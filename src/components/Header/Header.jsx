@@ -23,6 +23,7 @@ const Header = ({ loading }) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isAuthenticated = !!user;
 
   const handleSignOut = () => {
     signOut(auth)
@@ -38,6 +39,10 @@ const Header = ({ loading }) => {
 
   const handleTheme = () => {
     dispatch(toggleTheme());
+  };
+
+  const handleCartClick = () => {
+    navigate(isAuthenticated ? "/app/cart" : "/login");
   };
 
   if (loading) {
@@ -65,7 +70,7 @@ const Header = ({ loading }) => {
       <div>
         <ul className=" flex justify-center items-center text-xl px-3">
           <li className="relative group mr-2 pr-2 font-bold transition duration-300 ease-in-out hover:scale-110 hover:text-orange-400">
-            <Link to="">
+            <Link to={"/"}>
               <HomeIcon className="h-7 w-7" />
             </Link>
             <span
@@ -76,9 +81,12 @@ const Header = ({ loading }) => {
             </span>
           </li>
           <li className="relative group pr-2 font-bold transition duration-300 ease-in-out hover:scale-110 hover:text-orange-400">
-            <Link to="cart" className="flex items-center space-x-1">
-              <CartIcon count={cartItems.length} />
-            </Link>
+            <button
+              className="flex items-center space-x-1"
+              onClick={handleCartClick}
+            >
+              <CartIcon count={isAuthenticated ? cartItems.length : 0} />
+            </button>
             <span
               className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-max px-2 py-1 bg-gray-800
                text-white dark:text-gray-900 dark:bg-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity"
@@ -101,39 +109,51 @@ const Header = ({ loading }) => {
               {theme === "light" ? "Dark Mode" : "Light Mode"}
             </span>
           </li>
-          <div
-            className="relative"
-            tabIndex={0}
-            onFocus={() => setIsDropDown(true)}
-            onBlur={() => setIsDropDown(false)}
-          >
-            {user?.photoURL ? (
-              <img
-                src={user.photoURL}
-                alt={user.displayName || "User"}
-                className="h-8 w-8 rounded-full cursor-pointer object-cover border-2 border-orange-500"
-              />
-            ) : (
-              <UserCircleIcon className="h-7 w-7 cursor-pointer" />
-            )}
+          {isAuthenticated ? (
+            <li
+              className="relative"
+              tabIndex={0}
+              onFocus={() => setIsDropDown(true)}
+              onBlur={() => setIsDropDown(false)}
+            >
+              {user?.photoURL ? (
+                <img
+                  src={user.photoURL}
+                  alt={user.displayName || "User"}
+                  className="h-8 w-8 rounded-full cursor-pointer object-cover border-2 border-orange-500"
+                />
+              ) : (
+                <UserCircleIcon className="h-7 w-7 cursor-pointer" />
+              )}
 
-            {isDropDown && (
-              <div className=" absolute z-10 right-4 w-40 bg-white text-black dark:bg-gray-800 dark:text-white text-sm rounded-lg shadow-lg border-2 border-orange-600">
-                <div className="px-4 py-4 border-b border-black dark:border-white">
-                  <p className="font-semibold truncate">
-                    {user?.displayName || "User"}
-                  </p>
-                  <p className="truncate text-xs">{user?.email}</p>
+              {isDropDown && (
+                <div className=" absolute z-10 right-4 w-40 bg-white text-black dark:bg-gray-800 dark:text-white text-sm rounded-lg shadow-lg border-2 border-orange-600">
+                  <div className="px-4 py-4 border-b border-black dark:border-white">
+                    <p className="font-semibold truncate">
+                      {user?.displayName || "User"}
+                    </p>
+                    <p className="truncate text-xs">{user?.email}</p>
+                  </div>
+                  <button
+                    className="px-4 py-4 font-semibold hover:text-orange-400"
+                    onMouseDown={handleSignOut}
+                  >
+                    Sign Out
+                  </button>
                 </div>
-                <button
-                  className="px-4 py-4 font-semibold hover:text-orange-400"
-                  onMouseDown={handleSignOut}
-                >
-                  Sign Out
-                </button>
-              </div>
-            )}
-          </div>
+              )}
+            </li>
+          ) : (
+            <li>
+              <Link
+                to="/login"
+                className="px-4 py-2 rounded-full bg-orange-500 text-white text-base font-semibold 
+                    hover:bg-orange-600 transition"
+              >
+                Sign In
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
     </div>

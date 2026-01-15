@@ -124,7 +124,7 @@ const Main = () => {
         {filteredRestaurant.map((restaurant) => (
           <Link
             key={restaurant.info.id}
-            to={`/app/restaurants/${restaurant.info.id}`}
+            to={`/restaurants/${restaurant.info.id}`}
           >
             <RestaurantCard resdata={restaurant} />
           </Link>
