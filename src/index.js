@@ -12,15 +12,14 @@ import PasswordReset from "./components/Auth/PasswordReset";
 import RestaurantCategoryShimmer from "./components/Restaurant/RestaurantCategoryShimmer";
 import Main from "./components/Home/Main";
 import AuthProvider from "./components/Auth/AuthProvider";
+import { Toaster } from "react-hot-toast";
 
 const Menupage = lazy(() => import("./components/Restaurant/Menupage"));
 
 const Browerpath = createBrowserRouter([
   {
     path: "/",
-    element: (
-        <App />
-    ),
+    element: <App />,
     children: [
       {
         path: "",
@@ -37,9 +36,10 @@ const Browerpath = createBrowserRouter([
       {
         path: "cart",
         element: (
-        <ProtectedRoute>
-        <Cart />
-      </ProtectedRoute>),
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        ),
       },
     ],
     errorElement: <Error />,
@@ -63,6 +63,19 @@ root.render(
   <Provider store={appstore}>
     <AuthProvider>
       <RouterProvider router={Browerpath} />
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          className:
+            "font-semibold border border-orange-400 rounded-xl shadow-lg " +
+            "bg-white text-black dark:bg-gray-800 dark:text-white",
+          duration: 2500,
+          iconTheme: {
+            primary: "#fb923c",
+            secondary: "#ffffff",
+          },
+        }}
+      />
     </AuthProvider>
   </Provider>
 );

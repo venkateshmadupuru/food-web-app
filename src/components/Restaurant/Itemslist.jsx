@@ -1,11 +1,13 @@
-import { useDispatch } from "react-redux";
+import { useDispatch} from "react-redux";
 import { addItem, removeItem } from "../../utils/cartslice";
 import { getMenuImage } from "../../utils/getMenuImage";
+import toast from "react-hot-toast";
 
 const Itemslist = ({ items, isCart = false }) => {
   const dispatch = useDispatch();
 
   const handleAddItem = (item) => {
+   toast.success("Added to cart 🛒");
     dispatch(addItem(item));
   };
   const handleremoveItem = (item) => {
