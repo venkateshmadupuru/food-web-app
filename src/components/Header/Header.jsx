@@ -14,6 +14,7 @@ import {
   SunIcon,
   UserCircleIcon,
 } from "@heroicons/react/16/solid";
+import toast from "react-hot-toast";
 
 const Header = ({ loading }) => {
   const cartItems = useSelector((store) => store.cart.items);
@@ -42,7 +43,12 @@ const Header = ({ loading }) => {
   };
 
   const handleCartClick = () => {
-    navigate(isAuthenticated ? "/app/cart" : "/login");
+    if (!isAuthenticated) {
+      toast.error("Please login to access the cart");
+      navigate("/login");
+      return;
+    }
+    navigate("/app/cart");
   };
 
   if (loading) {
