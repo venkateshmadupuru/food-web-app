@@ -88,7 +88,7 @@ const PasswordReset = () => {
         </button>
         {message && <p className="text-green-400 my-1 ">{message}</p>}
         <div className="flex justify-between mt-5">
-          <Link to="/" className="text-md font-semibold text-orange-500 hover:opacity-80">
+          <Link to="/login" className="text-md font-semibold text-orange-500 hover:opacity-80">
             <IoArrowBack className="w-5 h-5 inline-block mr-1" /> Back to Login
           </Link>
         </div>
