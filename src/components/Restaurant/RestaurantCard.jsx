@@ -1,10 +1,17 @@
+import { IoStar } from "react-icons/io5";
 import { CDN_URL } from "../../utils/constants";
-import RatingBadge from "../../utils/RatingBadge";
 
 const RestaurantCard = (props) => {
   const { resdata } = props;
   const { name, cloudinaryImageId, cuisines, avgRating, locality, costForTwo } =
     resdata?.info;
+
+  const getStarColorClass = (rating) => {
+    const parsedRating = parseFloat(rating);
+    if (parsedRating >= 4) return "text-green-600 dark:text-green-400";
+    if (parsedRating >= 3) return "text-orange-500 dark:text-orange-400";
+    return "text-red-500 dark:text-red-400";
+  };
 
   return (
     <div
@@ -22,11 +29,9 @@ const RestaurantCard = (props) => {
         <h5 className="text-lg font-bold whitespace-nowrap overflow-hidden text-ellipsis py-1">
           {name}
         </h5>
-        <div className="flex items-center">
-          <span>
-            <RatingBadge rating={avgRating} />
-          </span>
-          <span className="text-sm">{avgRating}</span>
+        <div className="flex items-center gap-1">
+          <IoStar className={getStarColorClass(avgRating)} size={18} />
+          <span className="text-sm font-semibold">{avgRating}</span>
         </div>
         <div className="text-md whitespace-nowrap overflow-hidden text-ellipsis py-2">
           <p>{cuisines.join(",")}</p>
