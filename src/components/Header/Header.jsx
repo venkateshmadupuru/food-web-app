@@ -48,7 +48,7 @@ const Header = ({ loading }) => {
       navigate("/login");
       return;
     }
-    navigate("/app/cart");
+    navigate("/cart");
   };
 
   if (loading) {
@@ -70,7 +70,7 @@ const Header = ({ loading }) => {
           BigBite
         </h1>
         <p className="text-sm text-gray-500 dark:text-gray-300 italic md:block hidden">
-          Big Bite’s Food at lightning speed
+        Your daily bite of Happiness
         </p>
       </div>
       <div>
