@@ -24,25 +24,29 @@ const Login = () => {
   } = useForm();
 
   const formSubmit = async (data) => {
-    const { firstName, lastName, email: userEmail, password } = data;
+    const { userName, email: userEmail, password, confirmPassword } = data;
 
+    if (password !== confirmPassword) {
+      setErrorMessage("Passwords do not match");
+      return;
+    }
     try {
       if (showSignInForm) {
         await signInWithEmailAndPassword(auth, userEmail, password);
-        navigate("/app", { replace: true });
+        navigate("/", { replace: true });
       } else {
         const userCredential = await createUserWithEmailAndPassword(
           auth,
           userEmail,
-          password
+          password,
         );
         // Signed up
         const user = userCredential.user;
         const avatarURL = `https://ui-avatars.com/api/?name=${encodeURIComponent(
-          `${firstName} ${lastName}`
+          `${userName}`,
         )}&background=6b7280&color=fff&bold=true&size=128&length=2&v=${Date.now()}`;
         await updateProfile(user, {
-          displayName: `${firstName} ${lastName}`,
+          displayName: `${userName}`,
           photoURL: avatarURL,
         });
         // Profile updated!
@@ -54,9 +58,9 @@ const Login = () => {
             email: updatedUser.email,
             displayName: updatedUser.displayName,
             photoURL: updatedUser.photoURL,
-          })
+          }),
         );
-        navigate("/app", { replace: true });
+        navigate("/", { replace: true });
       }
     } catch (error) {
       setErrorMessage(error.message || "Something went wrong");
@@ -100,33 +104,18 @@ const Login = () => {
           <>
             <input
               type="text"
-              placeholder="FirstName"
+              placeholder="User Name"
               className="p-4 my-4 w-full rounded-lg bg-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-500"
-              {...register("firstName", {
-                required: "FirstName is Required",
+              {...register("userName", {
+                required: "Name is Required",
                 minLength: {
                   value: 2,
-                  message: "First name must be atleast 2 characters",
+                  message: "Name must be atleast 2 characters",
                 },
               })}
             />
-            {errors.firstName && (
-              <p className="text-red-500 text-sm">{errors.firstName.message}</p>
-            )}
-            <input
-              type="text"
-              placeholder="LastName"
-              className="p-4 my-4 w-full rounded-lg bg-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-500"
-              {...register("lastName", {
-                required: "LastName is Required",
-                minLength: {
-                  value: 2,
-                  message: "Last name must be atleast 2 characters",
-                },
-              })}
-            />
-            {errors.lastName && (
-              <p className="text-red-500 text-sm">{errors.lastName.message}</p>
+            {errors.userName && (
+              <p className="text-red-500 text-sm">{errors.userName.message}</p>
             )}
           </>
         )}
@@ -159,6 +148,27 @@ const Login = () => {
         />
         {errors.password && (
           <p className="text-red-500 text-sm">{errors.password.message}</p>
+        )}
+        {!showSignInForm && (
+          <>
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              className="p-4 my-4 w-full rounded-lg bg-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              {...register("confirmPassword", {
+                required: "Confirm Password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be at least 6 characters",
+                },
+              })}
+            />
+            {errors.confirmPassword && (
+              <p className="text-red-500 text-sm">
+                {errors.confirmPassword.message}
+              </p>
+            )}
+          </>
         )}
         {errorMessage && (
           <p className="text-red-500 text-sm my-2">{errorMessage}</p>
