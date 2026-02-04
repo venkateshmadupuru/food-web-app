@@ -5,6 +5,7 @@ import { auth } from "../../utils/firebase";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { Link } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
+import { FaEnvelope } from "react-icons/fa";
 
 const getFriendlyError = (code) => {
   switch (code) {
@@ -33,7 +34,7 @@ const PasswordReset = () => {
     try {
       await sendPasswordResetEmail(auth, data.email);
       setMessage(
-        "If an account with that email exists, a password reset link has been sent.Please check Spam"
+        "If an account with that email exists, a password reset link has been sent.Please check Spam",
       );
     } catch (error) {
       setMessage(getFriendlyError(error.code));
@@ -51,7 +52,9 @@ const PasswordReset = () => {
           src={LOGO_URL}
           alt="brand-logo"
         />
-        <h1 className="flex-1 text-center text-4xl font-bold text-orange-500 mt-8 hover:scale-105 transition-transform cursor-pointer">BigBite</h1>
+        <h1 className="flex-1 text-center text-4xl font-bold text-orange-500 mt-8 hover:scale-105 transition-transform cursor-pointer">
+          BigBite
+        </h1>
       </div>
       <div className="fixed inset-0 -z-10">
         <img
@@ -66,18 +69,21 @@ const PasswordReset = () => {
         className="absolute items-center bg-black/60 md:w-3/12 text-white md:mx-auto m-5 right-0 left-0 p-12 my-36 rounded-xl z-10"
       >
         <h2 className="font-semibold text-xl mb-3">Reset Your Password</h2>
-        <input
-          className="p-4 my-4 w-full rounded-lg bg-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-500"
-          type="email"
-          placeholder="Enter your email"
-          {...register("email", {
-            required: "Email is required",
-            pattern: {
-              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-              message: "Invalid email format",
-            },
-          })}
-        />
+        <div className="relative my-4">
+          <FaEnvelope className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-200" />
+          <input
+            className="p-4 w-full rounded-lg bg-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-500 pl-12"
+            type="email"
+            placeholder="Enter your email"
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Invalid email format",
+              },
+            })}
+          />
+        </div>
         {errors.email && <p className="text-red-700">{errors.email.message}</p>}
         <button
           type="submit"
@@ -88,7 +94,10 @@ const PasswordReset = () => {
         </button>
         {message && <p className="text-green-400 my-1 ">{message}</p>}
         <div className="flex justify-between mt-5">
-          <Link to="/login" className="text-md font-semibold text-orange-500 hover:opacity-80">
+          <Link
+            to="/login"
+            className="text-md font-semibold text-orange-500 hover:opacity-80"
+          >
             <IoArrowBack className="w-5 h-5 inline-block mr-1" /> Back to Login
           </Link>
         </div>

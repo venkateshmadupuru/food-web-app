@@ -10,12 +10,14 @@ import { auth } from "../../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../utils/userSlice";
 import { Link, useNavigate } from "react-router-dom";
+import { FaEnvelope, FaEye, FaEyeSlash, FaLock, FaUser } from "react-icons/fa";
 
 const Login = () => {
   const [showSignInForm, setShowSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
@@ -24,12 +26,7 @@ const Login = () => {
   } = useForm();
 
   const formSubmit = async (data) => {
-    const { userName, email: userEmail, password, confirmPassword } = data;
-
-    if (password !== confirmPassword) {
-      setErrorMessage("Passwords do not match");
-      return;
-    }
+    const { userName, email: userEmail, password } = data;
     try {
       if (showSignInForm) {
         await signInWithEmailAndPassword(auth, userEmail, password);
@@ -102,73 +99,68 @@ const Login = () => {
         </h1>
         {!showSignInForm && (
           <>
-            <input
-              type="text"
-              placeholder="User Name"
-              className="p-4 my-4 w-full rounded-lg bg-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-500"
-              {...register("userName", {
-                required: "Name is Required",
-                minLength: {
-                  value: 2,
-                  message: "Name must be atleast 2 characters",
-                },
-              })}
-            />
+            <div className="relative my-4">
+              <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <input
+                type="text"
+                placeholder="User Name"
+                className="p-3 w-full rounded-lg bg-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-500 pl-12"
+                {...register("userName", {
+                  required: "Name is Required",
+                  minLength: {
+                    value: 2,
+                    message: "Name must be atleast 2 characters",
+                  },
+                })}
+              />
+            </div>
             {errors.userName && (
               <p className="text-red-500 text-sm">{errors.userName.message}</p>
             )}
           </>
         )}
-        <input
-          type="text"
-          placeholder="Email"
-          className="p-4 my-4 w-full rounded-lg bg-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-500"
-          {...register("email", {
-            required: "Email is required",
-            pattern: {
-              value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-              message: "Invalid email address",
-            },
-          })}
-        />
+        <div className="relative my-4">
+          <FaEnvelope className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Email"
+            className="p-3 w-full rounded-lg bg-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-500 pl-12"
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+                message: "Invalid email address",
+              },
+            })}
+          />
+        </div>
         {errors.email && (
           <p className="text-red-500 text-sm">{errors.email.message}</p>
         )}
-        <input
-          type="password"
-          placeholder="Password"
-          className="p-4 my-4 w-full rounded-lg bg-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-500"
-          {...register("password", {
-            required: "Password is required",
-            minLength: {
-              value: 6,
-              message: "Password must be at least 6 characters",
-            },
-          })}
-        />
+        <div className="relative my-4">
+          <FaLock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            className="p-3 w-full rounded-lg bg-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-500 pl-12"
+            {...register("password", {
+              required: "Password is required",
+              minLength: {
+                value: 6,
+                message: "Password must be at least 6 characters",
+              },
+            })}
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-orange-500 transition-colors"
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
+          </button>
+        </div>
         {errors.password && (
           <p className="text-red-500 text-sm">{errors.password.message}</p>
-        )}
-        {!showSignInForm && (
-          <>
-            <input
-              type="password"
-              placeholder="Confirm Password"
-              className="p-4 my-4 w-full rounded-lg bg-gray-800 focus:outline-none focus:ring-2 focus:ring-orange-500"
-              {...register("confirmPassword", {
-                required: "Confirm Password is required",
-                minLength: {
-                  value: 6,
-                  message: "Password must be at least 6 characters",
-                },
-              })}
-            />
-            {errors.confirmPassword && (
-              <p className="text-red-500 text-sm">
-                {errors.confirmPassword.message}
-              </p>
-            )}
-          </>
         )}
         {errorMessage && (
           <p className="text-red-500 text-sm my-2">{errorMessage}</p>
