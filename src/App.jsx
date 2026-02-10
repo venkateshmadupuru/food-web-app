@@ -9,23 +9,22 @@ const App = () => {
   const theme = useSelector((store) => store.theme.mode);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-    const timer = setTimeout(() => setLoading(false), 2000);
-    return () => clearTimeout(timer);
+    document.documentElement.classList.toggle("dark", theme === "dark");
   }, [theme]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-      <div className="min-h-screen flex flex-col dark:bg-gray-900 dark:text-white">
-        <Header loading={loading} />
-        <div className="flex-grow">
-          <Outlet />
-        </div>
-        <Footer />
+    <div className="min-h-screen flex flex-col dark:bg-gray-900 dark:text-white">
+      <Header loading={loading} />
+      <div className="flex-grow">
+        <Outlet />
       </div>
+      <Footer />
+    </div>
   );
 };
 
