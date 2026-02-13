@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const authUiSlice = createSlice({
-  name: "authUi",
+const authSlice = createSlice({
+  name: "auth",
   initialState: {
     open: false,
     intent: null, // "cart" | "signin" | null
@@ -18,5 +18,5 @@ const authUiSlice = createSlice({
   },
 });
 
-export const { openAuth, closeAuth } = authUiSlice.actions;
-export default authUiSlice.reducer;
+export const { openAuth, closeAuth } = authSlice.actions;
+export default authSlice.reducer;
