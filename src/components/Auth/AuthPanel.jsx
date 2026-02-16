@@ -1,15 +1,26 @@
-import {  useCallback, useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { closeAuth } from "../../utils/authUiSlice";
+import { closeAuth } from "../../utils/authSlice";
 import Login from "./Login";
+import { IoClose } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 const AuthPanel = () => {
   const dispatch = useDispatch();
-  const { open, intent } = useSelector((s) => s.authUi);
+  const navigate = useNavigate();
+  const { open, intent } = useSelector((s) => s.auth);
 
   const onClose = useCallback(() => {
     dispatch(closeAuth());
   }, [dispatch]);
+
+  const handleSuccess = useCallback(() => {
+    dispatch(closeAuth());
+
+    if (intent === "cart") {
+      navigate("/cart");
+    }
+  }, [dispatch, intent, navigate]);
 
   useEffect(() => {
     if (!open) return;
@@ -29,22 +40,27 @@ const AuthPanel = () => {
 
   if (!open) return null;
 
-  return (
-    <div className="fixed inset-0 z-50">
-      <div className="absolute inset-0 bg-black/50" onClick={onClose} />
+  const title = intent === "cart" ? "Sign in to view your cart" : "Welcome";
 
-      <div className="absolute right-0 top-0 h-full w-full max-w-md bg-black/95 text-white p-6 shadow-2xl">
+  return (
+    <div className="fixed inset-0 z-50 flex justify-end">
+      <div
+        className="absolute inset-0 bg-black/40 dark:bg-black/60 backdrop-blur-sm"
+        onClick={onClose}
+      />
+      <div className="relative h-full w-full max-w-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-2xl border-l border-gray-200 dark:border-gray-700 p-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold">Welcome</h2>
-          <button onClick={onClose} className="text-2xl font-bold">
-            ✕
+          <h2 className="text-xl font-bold">{title}</h2>
+          <button
+            onClick={onClose}
+            className="p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+          >
+            <IoClose className="text-xl" />
           </button>
         </div>
-
-        <Login isDrawer intent={intent} onClose={onClose} />
-      </div>
+        <Login onSuccess={handleSuccess} />
+     </div>
     </div>
   );
-};
-
+}
 export default AuthPanel;

@@ -4,6 +4,7 @@ import "./index.css";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Footer from "./components/Footer/Footer";
+import AuthPanel from "./components/Auth/AuthPanel";
 
 const App = () => {
   const theme = useSelector((store) => store.theme.mode);
@@ -20,6 +21,7 @@ const App = () => {
   return (
     <div className="min-h-screen flex flex-col dark:bg-gray-900 dark:text-white">
       <Header loading={loading} />
+      <AuthPanel />
       <div className="flex-grow">
         <Outlet />
       </div>

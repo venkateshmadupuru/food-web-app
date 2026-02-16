@@ -14,7 +14,7 @@ import {
   SunIcon,
   UserCircleIcon,
 } from "@heroicons/react/16/solid";
-import toast from "react-hot-toast";
+import { openAuth } from "../../utils/authSlice";
 
 const Header = ({ loading }) => {
   const cartItems = useSelector((store) => store.cart.items);
@@ -31,6 +31,7 @@ const Header = ({ loading }) => {
       .then(() => {
         // Sign-out successful.
         dispatch(removeUser());
+        setIsDropDown(false);
         navigate("/");
       })
       .catch((error) => {
@@ -41,11 +42,12 @@ const Header = ({ loading }) => {
   const handleTheme = () => {
     dispatch(toggleTheme());
   };
-
+  const openSignInPanel = () => {
+    dispatch(openAuth({ intent: "signin" }));
+  };
   const handleCartClick = () => {
     if (!isAuthenticated) {
-      toast.error("Please login to access the cart");
-      navigate("/login");
+      dispatch(openAuth({ intent: "cart" }));
       return;
     }
     navigate("/cart");
@@ -70,7 +72,7 @@ const Header = ({ loading }) => {
           BigBite
         </h1>
         <p className="text-sm text-gray-500 dark:text-gray-300 italic md:block hidden">
-        Your daily bite of Happiness
+          Your daily bite of Happiness
         </p>
       </div>
       <div>
@@ -151,13 +153,12 @@ const Header = ({ loading }) => {
             </li>
           ) : (
             <li>
-              <Link
-                to="/login"
-                className="px-4 py-2 rounded-full bg-orange-500 text-white text-base font-semibold 
-                    hover:bg-orange-600 transition"
+              <button
+                onClick={openSignInPanel}
+                className="px-4 py-2 rounded-full bg-orange-500 text-white text-base font-semibold hover:bg-orange-600 transition"
               >
                 Sign In
-              </Link>
+              </button>
             </li>
           )}
         </ul>
