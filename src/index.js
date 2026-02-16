@@ -4,11 +4,9 @@ import App from "./App";
 import Error from "./components/Error/Error";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Cart from "./components/Cart/Cart";
-import Login from "./components/Auth/Login";
 import { Provider } from "react-redux";
 import appstore from "./utils/appstore";
 import ProtectedRoute from "./components/Auth/ProtectedRoute";
-import PasswordReset from "./components/Auth/PasswordReset";
 import RestaurantCategoryShimmer from "./components/Restaurant/RestaurantCategoryShimmer";
 import Main from "./components/Home/Main";
 import AuthProvider from "./components/Auth/AuthProvider";
@@ -43,14 +41,6 @@ const Browerpath = createBrowserRouter([
       },
     ],
     errorElement: <Error />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/password-reset",
-    element: <PasswordReset />,
   },
   {
     path: "*",
