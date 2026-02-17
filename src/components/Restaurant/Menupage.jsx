@@ -6,7 +6,7 @@ import RestaurantCategoryShimmer from "./RestaurantCategoryShimmer";
 const Menupage = () => {
   const { resId } = useParams();
   const { hotelPage, loading, error } = useMenuPage(resId);
-  const [showIndex, setShowIndex] = useState(null);
+  const [showIndex, setShowIndex] = useState(0);
 
   if (loading) return <RestaurantCategoryShimmer />;
 
@@ -24,7 +24,7 @@ const Menupage = () => {
       </div>
     );
 
-  const { city, costForTwoMessage, name } =
+  const { costForTwoMessage, name } =
     hotelPage?.data?.cards?.[2]?.card?.card?.info || {};
 
   const categories =
@@ -36,15 +36,13 @@ const Menupage = () => {
   return (
     <div className=" w-full h-auto text-center dark:text-white space-y-2 my-3 pb-5">
       <h1 className="font-bold text-2xl">{name ?? "Menu"}</h1>
-      <h3 className="font-bold text-lg">
-        {city ?? "Bangalore"} - {costForTwoMessage ?? "₹400"}
-      </h3>
-      {categories.map((category, Index) => (
+      <h3 className="font-bold text-lg">{costForTwoMessage ?? "400"}</h3>
+      {categories.map((category, index) => (
         <RestaurantCategory
-          key={category.card.card.title}
+          key={category?.card?.card?.title}
           data={category?.card?.card}
-          showItems={Index === showIndex}
-          setShowIndex={() => setShowIndex(showIndex === Index ? null : Index)}
+          showItems={index === showIndex}
+          setShowIndex={() => setShowIndex(showIndex === index ? null : index)}
         />
       ))}
     </div>
