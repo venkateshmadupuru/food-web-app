@@ -8,6 +8,10 @@ const Menupage = () => {
   const { hotelPage, loading, error } = useMenuPage(resId);
   const [showIndex, setShowIndex] = useState(0);
 
+  const handleToggle = (index) => {
+    setShowIndex((prevIndex) => (prevIndex === index ? -1 : index));
+  }
+
   if (loading) return <RestaurantCategoryShimmer />;
 
   if (error)
@@ -42,7 +46,7 @@ const Menupage = () => {
           key={category?.card?.card?.title}
           data={category?.card?.card}
           showItems={index === showIndex}
-          setShowIndex={() => setShowIndex(showIndex === index ? null : index)}
+          onToggle={() => handleToggle(index)}
         />
       ))}
     </div>
