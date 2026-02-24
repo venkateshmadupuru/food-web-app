@@ -1,4 +1,3 @@
-import { LOGO_URL } from "../../utils/constants";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "firebase/auth";
@@ -8,12 +7,8 @@ import { toggleTheme } from "../../utils/themeSlice";
 import { useState } from "react";
 import HeaderShimmer from "./HeaderShimmer";
 import CartIcon from "../Cart/CartIcon";
-import {
-  HomeIcon,
-  MoonIcon,
-  SunIcon,
-  UserCircleIcon,
-} from "@heroicons/react/16/solid";
+import { CiUser } from "react-icons/ci";
+import { MoonIcon, SunIcon, UserCircleIcon } from "@heroicons/react/16/solid";
 import { openAuth } from "../../utils/authSlice";
 
 const Header = ({ loading }) => {
@@ -34,7 +29,7 @@ const Header = ({ loading }) => {
         setIsDropDown(false);
         navigate("/");
       })
-      .catch((error) => {
+      .catch(() => {
         navigate("/error");
       });
   };
@@ -56,114 +51,116 @@ const Header = ({ loading }) => {
   if (loading) {
     return <HeaderShimmer />;
   }
-  return (
-    <div className="flex justify-between items-center shadow-md dark:bg-gray-800 dark:text-white font-serif">
-      <div>
-        <img
-          className="logo md:w-14 md:h-14 w-10 h-10 bg-orange-600 m-3 rounded-full p-1 
-          hover:scale-105 transition-transform duration-300"
-          src={LOGO_URL}
-          alt="brand-logo"
-        />
-      </div>
 
-      <div className="text-center flex-1">
-        <h1 className="md:block hidden text-3xl  font-extrabold bg-gradient-to-br from-orange-400 to-yellow-500 bg-clip-text text-transparent">
-          BigBite
-        </h1>
-        <p className="text-sm text-gray-500 dark:text-gray-300 italic md:block hidden">
-          Your daily bite of Happiness
-        </p>
-      </div>
-      <div>
-        <ul className=" flex justify-center items-center text-xl px-3">
-          <li className="relative group mr-2 pr-2 font-bold transition duration-300 ease-in-out hover:scale-110 hover:text-orange-400">
-            <Link to={"/"}>
-              <HomeIcon className="h-7 w-7" />
-            </Link>
-            <span
-              className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-max px-2 py-1 bg-gray-800
-               text-white dark:text-gray-900 dark:bg-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity"
-            >
-              Home
+  const navItemClass =
+    "inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-slate-700 " +
+    "transition-colors hover:bg-orange-50 hover:text-orange-600 dark:text-slate-100 dark:hover:bg-slate-700/70 dark:hover:text-orange-300";
+
+  return (
+    <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 shadow-sm backdrop-blur-md dark:border-slate-700 dark:bg-gray-900/95">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-3 px-3 sm:px-6">
+        <Link to="/" className="flex min-w-0 items-center gap-3">
+          <div className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-orange-600 to-amber-500 text-lg font-black text-white shadow-sm">
+            BB
+          </div>
+          <div className="min-w-0">
+            <h1 className="hidden sm:block truncate text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+              BigBite
+            </h1>
+            <p className="hidden truncate text-xs font-medium text-slate-500 dark:text-slate-300 sm:block">
+              Fast food. Fresh mood.
+            </p>
+          </div>
+        </Link>
+
+        <nav className="flex items-center gap-1 sm:gap-2">
+          <button type="button" onClick={handleTheme} className={navItemClass}>
+            {theme === "light" ? (
+              <MoonIcon className="h-5 w-5" />
+            ) : (
+              <SunIcon className="h-5 w-5" />
+            )}
+            <span className="hidden sm:inline">
+              {theme === "light" ? "Dark" : "Light"}
             </span>
-          </li>
-          <li className="relative group pr-2 font-bold transition duration-300 ease-in-out hover:scale-110 hover:text-orange-400">
-            <button
-              className="flex items-center space-x-1"
-              onClick={handleCartClick}
-            >
-              <CartIcon count={isAuthenticated ? cartItems.length : 0} />
-            </button>
-            <span
-              className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-max px-2 py-1 bg-gray-800
-               text-white dark:text-gray-900 dark:bg-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity"
-            >
-              Cart
-            </span>
-          </li>
-          <li className="relative group">
-            <button onClick={handleTheme} className="m-3 cursor-pointer">
-              {theme === "light" ? (
-                <MoonIcon className="h-7 w-7" />
-              ) : (
-                <SunIcon className="h-7 w-7" />
-              )}
-            </button>
-            <span
-              className="absolute left-1/2 transform -translate-x-1/2 mt-12 w-max px-2 py-1 bg-gray-800
-             text-white dark:text-gray-900 dark:bg-white text-xs font-bold rounded opacity-0 group-hover:opacity-100 transition-opacity"
-            >
-              {theme === "light" ? "Dark Mode" : "Light Mode"}
-            </span>
-          </li>
+          </button>
+          <button
+            type="button"
+            className={navItemClass}
+            onClick={handleCartClick}
+          >
+            <CartIcon
+              className="h-5 w-5"
+              count={isAuthenticated ? cartItems.length : 0}
+            />
+            <span className="hidden sm:inline">Cart</span>
+          </button>
+
           {isAuthenticated ? (
-            <li
+            <div
               className="relative"
-              tabIndex={0}
               onFocus={() => setIsDropDown(true)}
-              onBlur={() => setIsDropDown(false)}
+              onBlur={(e) => {
+                if (!e.currentTarget.contains(e.relatedTarget)) {
+                  setIsDropDown(false);
+                }
+              }}
             >
-              {user?.photoURL ? (
-                <img
-                  src={user.photoURL}
-                  alt={user.displayName || "User"}
-                  className="h-8 w-8 rounded-full cursor-pointer object-cover border-2 border-orange-500"
-                />
-              ) : (
-                <UserCircleIcon className="h-7 w-7 cursor-pointer" />
-              )}
+              <button
+                type="button"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-slate-700 transition-colors hover:border-orange-300 hover:bg-orange-50 hover:text-orange-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-700/70 dark:hover:text-orange-300"
+              >
+                {user?.photoURL ? (
+                  <img
+                    src={user.photoURL}
+                    alt={user.displayName || "User"}
+                    className="h-8 w-8 rounded-full border border-orange-400 object-cover"
+                  />
+                ) : (
+                  <UserCircleIcon className="h-6 w-6" />
+                )}
+              </button>
 
               {isDropDown && (
-                <div className=" absolute z-10 right-4 w-40 bg-white text-black dark:bg-gray-800 dark:text-white text-sm rounded-lg shadow-lg border-2 border-orange-600">
-                  <div className="px-4 py-4 border-b border-black dark:border-white">
-                    <p className="font-semibold truncate">
+                <div
+                  className="absolute right-0 mt-2 w-48 overflow-hidden rounded-xl border border-slate-200 bg-white text-slate-800 shadow-xl dark:border-slate-700 dark:bg-gray-800 dark:text-white"
+                  onMouseDown={(e) => {
+                    if (e.target.tagName !== "BUTTON") {
+                      e.preventDefault();
+                    }
+                  }}
+                >
+                  <div className="border-b border-slate-200 px-4 py-3 dark:border-slate-700">
+                    <p className="truncate text-sm font-semibold">
                       {user?.displayName || "User"}
                     </p>
-                    <p className="truncate text-xs">{user?.email}</p>
+                    <p className="truncate text-xs text-slate-500 dark:text-slate-300">
+                      {user?.email}
+                    </p>
                   </div>
                   <button
-                    className="px-4 py-4 font-semibold hover:text-orange-400"
+                    type="button"
+                    className="w-full px-4 py-3 text-left text-sm font-semibold transition-colors hover:bg-orange-50 hover:text-orange-600 focus:outline-none focus-visible:bg-orange-50 focus-visible:text-orange-600 dark:hover:bg-slate-700 dark:hover:text-orange-300"
                     onMouseDown={handleSignOut}
                   >
                     Sign Out
                   </button>
                 </div>
               )}
-            </li>
+            </div>
           ) : (
-            <li>
-              <button
-                onClick={openSignInPanel}
-                className="px-4 py-2 rounded-full bg-orange-500 text-white text-base font-semibold hover:bg-orange-600 transition"
-              >
-                Sign In
-              </button>
-            </li>
+            <button
+              type="button"
+              onClick={openSignInPanel}
+              className={navItemClass}
+            >
+              <CiUser className="h-6 w-6" />
+              <span className="hidden sm:inline">Sign In</span>
+            </button>
           )}
-        </ul>
+        </nav>
       </div>
-    </div>
+    </header>
   );
 };
 export default Header;
