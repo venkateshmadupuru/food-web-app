@@ -74,7 +74,7 @@ const Main = () => {
     return <Shimmer />;
   }
   return (
-    <div className="font-serif">
+    <div className="font-serif w-full px-3 sm:px-6">
       <div className="w-full mt-3 flex justify-center">
         <div className="flex items-center w-full justify-center gap-2">
           <input
@@ -117,10 +117,10 @@ const Main = () => {
           </div>
         )}
       </div>
-      <h3 className="text-gray-900 dark:text-white text-2xl md:text-3xl px-4 mb-4 font-semibold">
+      <h2 className="text-gray-900 dark:text-white text-xl md:text-2xl px-1 mb-4 font-semibold">
         Top restaurant chains in Bangalore
-      </h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 p-2 no-underline">
+      </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 no-underline">
         {filteredRestaurant.map((restaurant) => (
           <Link
             key={restaurant.info.id}

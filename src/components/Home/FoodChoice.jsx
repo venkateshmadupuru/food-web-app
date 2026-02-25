@@ -22,8 +22,8 @@ const FoodChoices = ({ images }) => {
   if (isLoading) return <FoodChoiceShimmer />;
 
   return (
-    <div className="relative w-full px-4 md:px-8">
-      <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-gray-900 dark:text-white">
+    <div className="relative w-full px-1">
+      <h2 className="text-xl md:text-2xl font-extrabold mb-4 text-gray-900 dark:text-white">
         What's on your mind?
       </h2>
       <button
