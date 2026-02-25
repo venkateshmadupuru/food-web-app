@@ -70,7 +70,7 @@ const Login = ({ onSuccess }) => {
 
       const avatarURL = `https://ui-avatars.com/api/?name=${encodeURIComponent(
         data.userName,
-      )}&background=6b7280&color=fff&bold=true&size=128&length=2&v=${Date.now()}`;
+      )}&background=f97316&color=fff&bold=true&size=128&length=1&rounded=true`;
 
       await updateProfile(userCredential.user, {
         displayName: data.userName,
