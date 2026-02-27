@@ -1,15 +1,23 @@
 .shimmer {
-    background: linear-gradient(
+  background: linear-gradient(
     to right,
     rgba(241, 240, 240, 0.6) 0%,
     rgba(245, 245, 245, 0.8) 50%,
     rgba(238, 236, 234, 0.6) 100%
   );
-  background-size: 1000px 100%;
-  animation: effect 2s ease-in-out infinite alternate;
+  animation: shimmerEffect 2s ease-in-out infinite;
+}
+.dark .shimmer {
+  background: linear-gradient(
+    to right,
+    rgba(51, 65, 85, 0.56) 0%,
+    rgba(71, 85, 105, 0.72) 50%,
+    rgba(51, 65, 85, 0.56) 100%
+  );
+  background-size: 100% 100%;
 }
 
-@keyframes effect {
+@keyframes shimmerEffect {
   0% {
     opacity: 0.9;
   }
