@@ -14,6 +14,7 @@ const HeaderShimmer = () => {
 
         <div className="flex items-center gap-1 sm:gap-2">
           <div className="shimmer h-10 w-10 rounded-full sm:w-20"></div>
+          <div className="shimmer h-10 w-10 rounded-full sm:w-24"></div>
           <div className="shimmer h-10 w-10 rounded-full sm:w-20"></div>
           <div className="shimmer h-10 w-10 rounded-full sm:w-24"></div>
         </div>
