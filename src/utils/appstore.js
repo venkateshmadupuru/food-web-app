@@ -3,6 +3,7 @@ import cartReducer from "./cartslice";
 import userReducer from "./userSlice";
 import themeReducer from "./themeSlice";
 import authReducer from "./authSlice";
+import searchReducer from "./searchSlice";
 
 const appstore = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const appstore = configureStore({
     user: userReducer,
     theme: themeReducer,
     auth: authReducer,
+    search: searchReducer,
   },
 });
 

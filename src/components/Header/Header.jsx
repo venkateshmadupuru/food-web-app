@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "firebase/auth";
 import { auth } from "../../utils/firebase";
@@ -9,7 +9,9 @@ import HeaderShimmer from "./HeaderShimmer";
 import CartIcon from "../Cart/CartIcon";
 import { CiUser } from "react-icons/ci";
 import { MoonIcon, SunIcon, UserCircleIcon } from "@heroicons/react/16/solid";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { openAuth } from "../../utils/authSlice";
+import { openSearch } from "../../utils/searchSlice";
 
 const Header = ({ loading }) => {
   const cartItems = useSelector((store) => store.cart.items);
@@ -19,6 +21,7 @@ const Header = ({ loading }) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const isAuthenticated = !!user;
 
   const handleSignOut = () => {
@@ -46,6 +49,13 @@ const Header = ({ loading }) => {
       return;
     }
     navigate("/cart");
+  };
+  const handleSearchClick = () => {
+    dispatch(openSearch());
+
+    if (location.pathname !== "/") {
+      navigate("/");
+    }
   };
 
   if (loading) {
@@ -83,6 +93,14 @@ const Header = ({ loading }) => {
             <span className="hidden sm:inline">
               {theme === "light" ? "Dark" : "Light"}
             </span>
+          </button>
+          <button
+            type="button"
+            onClick={handleSearchClick}
+            className={navItemClass}
+          >
+            <MagnifyingGlassIcon className="h-5 w-5" />
+            <span className="hidden sm:inline">Search</span>
           </button>
           <button
             type="button"

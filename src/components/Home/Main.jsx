@@ -1,17 +1,23 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Shimmer from "../Shimmer/Shimmer.jsx";
 import useOnlineStatus from "../../hooks/useOnlineStatus";
 import FoodChoices from "./FoodChoice.jsx";
 import RestaurantCard from "../Restaurant/RestaurantCard.jsx";
 import { IoSearch } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
+import { clearSearchFocus } from "../../utils/searchSlice";
 
 const Main = () => {
   const [listOfRestaurant, setlistOfRestaurant] = useState([]);
   const [filteredRestaurant, setfilteredRestaurant] = useState([]);
   const [searchText, setsearchText] = useState("");
   const [imageGrids, setImageGrids] = useState([]);
+  const searchInputRef = useRef(null);
+  const dispatch = useDispatch();
+  const isSearchOpen = useSelector((store) => store.search.isSearchOpen);
+  const shouldFocusSearch = useSelector((store) => store.search.shouldFocusSearch);
 
   useEffect(() => {
     const fetchedData = async () => {
@@ -47,6 +53,13 @@ const Main = () => {
     fetchedData();
   }, []);
 
+  useEffect(() => {
+    if (isSearchOpen && shouldFocusSearch) {
+      searchInputRef.current?.focus();
+      dispatch(clearSearchFocus());
+    }
+  }, [isSearchOpen, shouldFocusSearch, dispatch]);
+
   const handleSearch = () => {
     const filteredRestaurant = listOfRestaurant.filter((restaurant) => {
       const name = restaurant?.info?.name?.toLowerCase() || "";
@@ -75,41 +88,44 @@ const Main = () => {
   }
   return (
     <div className="font-serif w-full px-3 sm:px-6">
-      <div className="w-full mt-3 flex justify-center">
-        <div className="flex items-center w-full justify-center gap-2">
-          <input
-            type="text"
-            data-testid="searchInput"
-            className="m-2 md:p-3 p-1
-          md:text-base text-black border border-gray-400 rounded-full w-1/2 pl-4
-          text-sm focus:outline-none focus:ring-2 focus:ring-orange-500
-          focus:border-orange-500 transition-all duration-300 ease-in-out"
-            placeholder="Search..."
-            value={searchText}
-            onChange={(e) => {
-              setsearchText(e.target.value);
-            }}
-            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-          />
-          <IoSearch
-            className=" md:hidden text-3xl cursor-pointer 
-             bg-gray-100 hover:bg-orange-100 
-             text-gray-600 hover:text-orange-500
-             p-2 rounded-full
-             transition-all duration-200 ease-in-out"
-            onClick={handleSearch}
-          />
-          <button
-            className="md:block hidden px-4 py-3 m-2 md:text-lg border border-orange-400 rounded-full 
-          bg-gradient-to-br from-amber-500 via-orange-400 to-orange-600 
-          transform hover:brightness-110 transition-transform duration-300
-           text-black font-bold cursor-pointer"
-            onClick={handleSearch}
-          >
-            Search
-          </button>
+      {isSearchOpen && (
+        <div className="w-full mt-3 flex justify-center">
+          <div className="flex items-center w-full justify-center gap-2">
+            <input
+              ref={searchInputRef}
+              type="text"
+              data-testid="searchInput"
+              className="m-2 md:p-3 p-1
+            md:text-base text-black border border-gray-400 rounded-full w-1/2 pl-4
+            text-sm focus:outline-none focus:ring-2 focus:ring-orange-500
+            focus:border-orange-500 transition-all duration-300 ease-in-out"
+              placeholder="Search..."
+              value={searchText}
+              onChange={(e) => {
+                setsearchText(e.target.value);
+              }}
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+            />
+            <IoSearch
+              className=" md:hidden text-3xl cursor-pointer 
+               bg-gray-100 hover:bg-orange-100 
+               text-gray-600 hover:text-orange-500
+               p-2 rounded-full
+               transition-all duration-200 ease-in-out"
+              onClick={handleSearch}
+            />
+            <button
+              className="md:block hidden px-4 py-3 m-2 md:text-lg border border-orange-400 rounded-full 
+            bg-gradient-to-br from-amber-500 via-orange-400 to-orange-600 
+            transform hover:brightness-110 transition-transform duration-300
+             text-black font-bold cursor-pointer"
+              onClick={handleSearch}
+            >
+              Search
+            </button>
+          </div>
         </div>
-      </div>
+      )}
       <div>
         {imageGrids.length > 0 && (
           <div className="my-8">
