@@ -38,7 +38,7 @@ const Menupage = () => {
         "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory",
     ) || [];
   return (
-    <div className=" w-full h-auto text-center dark:text-white space-y-2 my-3 pb-5">
+    <div className=" w-full h-auto px-3 sm:px-6 text-center dark:text-white space-y-2 my-3 pb-5">
       <h1 className="font-bold text-2xl">{name ?? "Menu"}</h1>
       <h3 className="font-bold text-lg">{costForTwoMessage ?? "400"}</h3>
       {categories.map((category, index) => (

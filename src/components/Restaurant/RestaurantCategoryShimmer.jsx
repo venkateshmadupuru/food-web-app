@@ -11,7 +11,7 @@ const RestaurantCategoryShimmer = () => {
         {Array.from({ length: 20 }).map((_, i) => (
           <div
             key={i}
-            className="shimmer w-6/12 h-14 mx-auto bg-gray-300 rounded-lg"
+            className="shimmer w-[95%] sm:w-11/12 md:w-9/12 lg:w-6/12 h-14 mx-auto rounded-lg"
           ></div>
         ))}
       </div>

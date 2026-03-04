@@ -5,7 +5,7 @@ const RestaurantCategory = ({ data, showItems, onToggle }) => {
   const title = data?.title ?? "Category";
   const count = data?.itemCards?.length ?? 0;
   return (
-    <div className="w-6/12 mx-auto my-5 p-4 bg-slate-100 shadow-lg rounded-lg dark:bg-gray-800 dark:text-gray-200 font-serif">
+    <div className="w-[95%] sm:w-11/12 md:w-9/12 lg:w-6/12 mx-auto my-5 p-4 bg-slate-100 shadow-lg rounded-lg dark:bg-gray-800 dark:text-gray-200 font-serif">
       <button
         type="button"
         className="w-full flex justify-between items-center cursor-pointer text-left"
