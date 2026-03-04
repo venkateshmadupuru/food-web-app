@@ -20,6 +20,7 @@ const Cart = () => {
     dispatch(clearCart());
     setOrderPlaced(false);
   };
+
   const cartItems = useSelector((store) => store.cart.items);
 
   const totalItems = cartItems.reduce((sum, item) => {
@@ -33,9 +34,12 @@ const Cart = () => {
     return sum + price * quantity;
   }, 0);
 
-  return (
-    <div className="w-6/12 m-auto p-4 text-center dark:text-white min-h-screen font-serif">
+  const formatCurrency = (amountInPaise) => {
+    return `Rs. ${(amountInPaise / 100).toFixed(2)}`;
+  };
 
+  return (
+    <div className="w-[95%] sm:w-11/12 md:w-9/12 lg:w-6/12 m-auto p-4 text-center dark:text-white min-h-screen font-serif">
       {orderPlaced && (
         <>
           <div className="text-green-500 text-2xl font-semibold mt-4">
@@ -44,13 +48,13 @@ const Cart = () => {
         </>
       )}
       {cartItems.length === 0 && !orderPlaced && (
-        <div className="flex flex-col justify-center items-center mt-32">
+        <div className="flex flex-col justify-center items-center mt-20 sm:mt-32">
           <MdRemoveShoppingCart className="text-6xl text-orange-400 mb-3" />
           <h1 className="text-xl md:text-2xl font-semibold text-orange-500 text-center">
             Your cart is empty
           </h1>
           <p className="text-lg text-gray-500 font-semibold mt-1 dark:text-gray-300">
-            Let’s fill it with something delicious
+            Let&apos;s fill it with something delicious
           </p>
         </div>
       )}
@@ -58,23 +62,23 @@ const Cart = () => {
         <>
           <button
             className="bg-orange-600 font-semibold text-white px-3 py-2 rounded-md m-4 
-            transform hover:scale-105 transition-transform duration-300"
+            transform hover:scale-105 transition-transform duration-300 w-full sm:w-auto"
             onClick={handleClearcart}
           >
             Clear Cart
           </button>
           <Itemslist items={cartItems} isCart={true} />
-          <div className="flex justify-between text-orange-500">
+          <div className="flex flex-col sm:flex-row sm:justify-between text-orange-500 gap-1 text-left">
             <h2 className="text-lg font-semibold">Total Items: {totalItems}</h2>
             <h2 className="text-lg font-semibold">
-              Total Amount: ₹ {(totalAmount / 100).toFixed(2)}
+              Subtotal: {formatCurrency(totalAmount)}
             </h2>
           </div>
 
           <button
             className="text-xl text-orange-400 font-bold px-4 py-2 
             bg-gradient-to-br from-gray-700 to-gray-600 transform 
-            hover:scale-110 transition-all duration-300 rounded-full mt-6"
+            hover:scale-110 transition-all duration-300 rounded-full mt-6 w-full sm:w-auto"
             onClick={handleOrderNow}
           >
             Order Now
@@ -84,4 +88,5 @@ const Cart = () => {
     </div>
   );
 };
+
 export default Cart;
