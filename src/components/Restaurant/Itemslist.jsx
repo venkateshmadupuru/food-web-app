@@ -7,35 +7,37 @@ const Itemslist = ({ items, isCart = false }) => {
   const dispatch = useDispatch();
 
   const handleAddItem = (item) => {
-    toast.success("Added to cart 🛒");
+    toast.success("Added to cart");
     dispatch(addItem(item));
   };
   const handleremoveItem = (item) => {
     dispatch(removeItem(item.card.info.id));
+  };
+  const getItemPrice = (info) => {
+    const priceInPaise = info.price ?? info.defaultPrice ?? 0;
+    return (priceInPaise / 100).toFixed(2);
   };
   return (
     <div className="dark:bg-gray-800 dark:text-white rounded-lg bg-gray-100">
       {items.map((item) => (
         <div
           key={item.card.info.id}
-          className="p-2 m-2 border-gray-500 border-b-2 text-left flex flex-col lg:flex-row justify-between"
+          className="p-2 m-2 border-gray-500 border-b-2 text-left flex flex-col lg:flex-row justify-between gap-3 items-start lg:items-center"
         >
           <div className="lg:w-8/12 md:top-0 w-full mt-4 order-2 lg:order-1">
-            <div className="py-2 font-bold">
+            <div className="py-2 font-bold flex justify-between gap-2 flex-wrap">
               <span>{item.card.info.name}</span>
               <span>
-                - ₹
-                {item.card.info.price
-                  ? item.card.info.price / 100
-                  : item.card.info.defaultPrice / 100}
+                - Rs.
+                {getItemPrice(item.card.info)}
               </span>
             </div>
             <p className="text-md">{item.card.info.description}</p>
           </div>
           <div className="lg:w-4/12 w-full p-4 relative order-1 lg:order-2">
-            <div className="absolute flex justify-center items-center space-x-9">
+            <div className="flex justify-center items-center gap-3 mt-2 mb-3">
               <button
-                className="bg-green-500 text-white px-3 text-xl mx-3 my-1 rounded-lg"
+                className="bg-green-500 text-white px-3 text-xl mx-1 sm:mx-3 my-1 rounded-lg"
                 onClick={() => handleAddItem(item)}
               >
                 +
@@ -45,7 +47,7 @@ const Itemslist = ({ items, isCart = false }) => {
               </p>
               {isCart && (
                 <button
-                  className="bg-red-500 text-white px-3 text-xl mx-40 my-1 rounded-lg"
+                  className="bg-red-500 text-white px-3 text-xl mx-1 sm:mx-3 my-1 rounded-lg"
                   onClick={() => handleremoveItem(item)}
                 >
                   -
@@ -57,7 +59,7 @@ const Itemslist = ({ items, isCart = false }) => {
               onError={(e) => {
                 e.currentTarget.src = "/images/menu/default.jpg";
               }}
-              className="md:w-full w-52 rounded-lg"
+              className="md:w-full w-full max-w-[220px] mx-auto rounded-lg"
               alt={item.card.info.name}
               loading="lazy"
             />
@@ -69,3 +71,4 @@ const Itemslist = ({ items, isCart = false }) => {
 };
 
 export default Itemslist;
+
