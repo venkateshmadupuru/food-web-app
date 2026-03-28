@@ -4,6 +4,7 @@ import userReducer from "./userSlice";
 import themeReducer from "./themeSlice";
 import authReducer from "./authSlice";
 import searchReducer from "./searchSlice";
+import locationReducer from "./locationSlice";
 
 const appstore = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const appstore = configureStore({
     theme: themeReducer,
     auth: authReducer,
     search: searchReducer,
+    location: locationReducer,
   },
 });
 
