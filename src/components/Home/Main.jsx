@@ -8,6 +8,7 @@ import RestaurantCard from "../Restaurant/RestaurantCard.jsx";
 import { IoSearch } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { clearSearchFocus } from "../../utils/searchSlice";
+import { DEFAULT_LOCATION } from "../../utils/constants";
 
 const Main = () => {
   const [listOfRestaurant, setlistOfRestaurant] = useState([]);
@@ -18,13 +19,18 @@ const Main = () => {
   const dispatch = useDispatch();
   const isSearchOpen = useSelector((store) => store.search.isSearchOpen);
   const shouldFocusSearch = useSelector((store) => store.search.shouldFocusSearch);
+  const selectedLocation = useSelector((store) => store.location.selectedLocation);
+  const activeLat = selectedLocation?.lat || DEFAULT_LOCATION.lat;
+  const activeLng = selectedLocation?.lng || DEFAULT_LOCATION.lng;
 
   useEffect(() => {
     const fetchedData = async () => {
       try {
         const API_BASE_URL =
           process.env.REACT_APP_API_URL || "http://localhost:5000";
-        const response = await fetch(`${API_BASE_URL}/api/restaurants`);
+        const response = await fetch(
+          `${API_BASE_URL}/api/restaurants?lat=${activeLat}&lng=${activeLng}`
+        );
 
         if (!response.ok) throw new Error("Failed to fetch data");
 
@@ -51,7 +57,7 @@ const Main = () => {
       }
     };
     fetchedData();
-  }, []);
+  }, [activeLat, activeLng]);
 
   useEffect(() => {
     if (isSearchOpen && shouldFocusSearch) {
@@ -86,6 +92,15 @@ const Main = () => {
   if (listOfRestaurant.length === 0) {
     return <Shimmer />;
   }
+
+  const locationHeading =
+    selectedLocation?.displayLabel === "Current location"
+      ? "Top restaurant chains near you"
+      : `Top restaurant chains in ${
+          selectedLocation?.label?.split(",")[0] ||
+          DEFAULT_LOCATION.label.split(",")[0]
+        }`;
+
   return (
     <div className="font-serif w-full px-3 sm:px-6">
       {isSearchOpen && (
@@ -134,7 +149,7 @@ const Main = () => {
         )}
       </div>
       <h2 className="text-gray-900 dark:text-white text-xl md:text-2xl px-1 mb-4 font-semibold">
-        Top restaurant chains in Bangalore
+        {locationHeading}
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 no-underline">
         {filteredRestaurant.map((restaurant) => (
