@@ -1,0 +1,89 @@
+import { useEffect, useState } from "react";
+
+const getRestaurantsFromResponse = (cards = []) => {
+  const restaurantCard = cards.find(
+    (card) => card.card?.card?.gridElements?.infoWithStyle?.restaurants
+  );
+
+  return (
+    restaurantCard?.card?.card?.gridElements?.infoWithStyle?.restaurants || []
+  );
+};
+
+const getImageGridsFromResponse = (cards = []) => {
+  const imageGridCard = cards.find(
+    (card) => card.card?.card?.imageGridCards?.info
+  );
+
+  return imageGridCard?.card?.card?.imageGridCards?.info || [];
+};
+
+const useRestaurants = (lat, lng) => {
+  const [restaurants, setRestaurants] = useState([]);
+  const [imageGrids, setImageGrids] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    if (!lat || !lng) {
+      setRestaurants([]);
+      setImageGrids([]);
+      setData(null);
+      setLoading(false);
+      return;
+    }
+
+    let ignore = false;
+
+    const fetchRestaurants = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const API_BASE_URL =
+          process.env.REACT_APP_API_URL || "http://localhost:5000";
+        const response = await fetch(
+          `${API_BASE_URL}/api/restaurants?lat=${lat}&lng=${lng}`
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch restaurants");
+        }
+
+        const nextData = await response.json();
+        const cards = nextData?.data?.cards || [];
+
+        if (ignore) {
+          return;
+        }
+
+        setData(nextData);
+        setRestaurants(getRestaurantsFromResponse(cards));
+        setImageGrids(getImageGridsFromResponse(cards));
+      } catch (fetchError) {
+        if (ignore) {
+          return;
+        }
+
+        setError(fetchError);
+        setRestaurants([]);
+        setImageGrids([]);
+      } finally {
+        if (!ignore) {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchRestaurants();
+
+    return () => {
+      ignore = true;
+    };
+  }, [lat, lng]);
+
+  return { restaurants, imageGrids, loading, error, data };
+};
+
+export default useRestaurants;

@@ -9,12 +9,11 @@ import { IoSearch } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { clearSearchFocus } from "../../utils/searchSlice";
 import { DEFAULT_LOCATION } from "../../utils/constants";
+import useRestaurants from "../../hooks/useRestaurants";
 
 const Main = () => {
-  const [listOfRestaurant, setlistOfRestaurant] = useState([]);
   const [filteredRestaurant, setfilteredRestaurant] = useState([]);
   const [searchText, setsearchText] = useState("");
-  const [imageGrids, setImageGrids] = useState([]);
   const searchInputRef = useRef(null);
   const dispatch = useDispatch();
   const isSearchOpen = useSelector((store) => store.search.isSearchOpen);
@@ -22,42 +21,11 @@ const Main = () => {
   const selectedLocation = useSelector((store) => store.location.selectedLocation);
   const activeLat = selectedLocation?.lat || DEFAULT_LOCATION.lat;
   const activeLng = selectedLocation?.lng || DEFAULT_LOCATION.lng;
+  const { restaurants, imageGrids, loading, error } = useRestaurants(activeLat, activeLng);
 
   useEffect(() => {
-    const fetchedData = async () => {
-      try {
-        const API_BASE_URL =
-          process.env.REACT_APP_API_URL || "http://localhost:5000";
-        const response = await fetch(
-          `${API_BASE_URL}/api/restaurants?lat=${activeLat}&lng=${activeLng}`
-        );
-
-        if (!response.ok) throw new Error("Failed to fetch data");
-
-        const data = await response.json();
-
-        const restaurantCard = data?.data?.cards.find(
-          (card) => card.card?.card?.gridElements?.infoWithStyle?.restaurants
-        );
-
-        const newRestaurants =
-          restaurantCard?.card?.card?.gridElements?.infoWithStyle
-            ?.restaurants || [];
-
-        setlistOfRestaurant(newRestaurants);
-        setfilteredRestaurant(newRestaurants);
-        const imageGridCard = data?.data?.cards.find(
-          (card) => card.card?.card?.imageGridCards?.info
-        );
-        const imageInfo = imageGridCard?.card?.card?.imageGridCards?.info || [];
-
-        setImageGrids(imageInfo);
-      } catch (err) {
-        console.error("Error fetching data:", err);
-      }
-    };
-    fetchedData();
-  }, [activeLat, activeLng]);
+    setfilteredRestaurant(restaurants);
+  }, [restaurants]);
 
   useEffect(() => {
     if (isSearchOpen && shouldFocusSearch) {
@@ -67,7 +35,7 @@ const Main = () => {
   }, [isSearchOpen, shouldFocusSearch, dispatch]);
 
   const handleSearch = () => {
-    const filteredRestaurant = listOfRestaurant.filter((restaurant) => {
+    const filteredRestaurant = restaurants.filter((restaurant) => {
       const name = restaurant?.info?.name?.toLowerCase() || "";
       const cuisines =
         restaurant?.info?.cuisines?.join(" ")?.toLowerCase() || "";
@@ -89,10 +57,8 @@ const Main = () => {
       </div>
     );
   }
-  if (listOfRestaurant.length === 0) {
-    return <Shimmer />;
-  }
-
+  if (loading) return <Shimmer />;
+  if (error) return <div>Unable to load restaurants.</div>;
   const locationHeading =
     selectedLocation?.displayLabel === "Current location"
       ? "Top restaurant chains near you"
