@@ -17,11 +17,15 @@ const Footer = () => {
 
   if (loading) return <FooterShimmer />;
   return (
-    <div className="bg-white text-gray-800 dark:text-gray-300 dark:bg-gray-800 px-6 py-10 mt-16 min-h-[300px] cursor-pointer">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 transition-colors [&_li:hover]:text-orange-400">
-        <div>
-          <h2 className="text-2xl font-bold">BigBite</h2>
-          <p className="mt-2 text-sm">
+    <div className="bg-white text-gray-800 dark:text-gray-300 dark:bg-gray-800 px-6 py-14 mt-16 min-h-[380px] cursor-pointer relative overflow-hidden">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-orange-400/70 to-transparent dark:via-orange-500/50"></div>
+      <div className="pointer-events-none absolute -top-24 right-0 h-56 w-56 rounded-full bg-orange-200/20 blur-3xl dark:bg-orange-500/10"></div>
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8 lg:gap-10 transition-colors [&_li:hover]:text-orange-400 relative z-10">
+        <div className="space-y-4">
+          <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            BigBite
+          </h2>
+          <p className="max-w-xs text-sm leading-6 text-gray-600 dark:text-gray-300">
             Serving cravings one bite at a time. Discover, order, and enjoy from
             your favorite restaurants.
           </p>
@@ -69,7 +73,7 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-      <div className="border-t border-gray-700 mt-10 pt-6 text-sm text-center text-gray-400">
+      <div className="border-t border-gray-700 mt-12 pt-7 text-sm text-center text-gray-400 relative z-10">
         <p>&copy; {new Date().getFullYear()} BigBite. All rights reserved.</p>
       </div>
     </div>
