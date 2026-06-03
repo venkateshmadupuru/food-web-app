@@ -58,7 +58,7 @@ const FoodChoices = ({ images }) => {
           What's on your mind?
         </h2>
 
-        <div className="flex items-center justify-center gap-3 sm:justify-end">
+        <div className="items-center justify-center gap-3 sm:justify-end hidden md:flex">
           <button
             type="button"
             onClick={() => scroll("left")}
