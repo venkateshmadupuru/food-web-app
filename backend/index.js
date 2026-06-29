@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
-import fs from "fs";
+import compression from "compression";
+import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -11,99 +12,165 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(cors());
+app.use(compression());
 app.use(express.json());
+
+const CACHE_TTL = 5 * 60 * 1000;
+const UPSTREAM_TIMEOUT_MS = 5000;
+const UPSTREAM_RETRIES = 2;
+
+const restaurantCache = new Map();
+const menuCache = new Map();
+
+const getCache = (cache, key) => {
+  const cached = cache.get(key);
+
+  if (!cached) return null;
+
+  if (Date.now() > cached.expiresAt) {
+    cache.delete(key);
+    return null;
+  }
+
+  return cached.data;
+};
+
+const setCache = (cache, key, data) => {
+  cache.set(key, {
+    data,
+    expiresAt: Date.now() + CACHE_TTL,
+  });
+};
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const fetchJSON = async (url, headers = {}, attempt = 1) => {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), UPSTREAM_TIMEOUT_MS);
+
+  try {
+    const response = await fetch(url, {
+      headers,
+      signal: controller.signal,
+    });
+
+    if (!response.ok) {
+      const text = await response.text();
+      if (response.status >= 500 && attempt <= UPSTREAM_RETRIES) {
+        await sleep(300 * attempt);
+        return fetchJSON(url, headers, attempt + 1);
+      }
+      const message = `Request failed (${response.status}) ${text.slice(0, 200)}`;
+      throw new Error(message);
+    }
+
+    return await response.json();
+  } catch (error) {
+    if (
+      attempt <= UPSTREAM_RETRIES &&
+      (error.name === "AbortError" || error.message?.includes("fetch"))
+    ) {
+      await sleep(300 * attempt);
+      return fetchJSON(url, headers, attempt + 1);
+    }
+    throw error;
+  } finally {
+    clearTimeout(timeoutId);
+  }
+};
 
 app.get("/api/restaurants", async (req, res) => {
   const lat = req.query.lat || "12.9628669";
   const lng = req.query.lng || "77.57750899999999";
 
-  const swiggyURL = `https://www.swiggy.com/dapi/restaurants/list/v5?lat=${lat}&lng=${lng}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`;
+  const key = `${lat}:${lng}`;
+
+  const cached = getCache(restaurantCache, key);
+
+  if (cached) {
+    return res.json(cached);
+  }
 
   try {
-    const response = await fetch(swiggyURL, {
-      headers: {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-        Accept: "application/json",
-      },
+    const url =
+      `https://www.swiggy.com/dapi/restaurants/list/v5` +
+      `?lat=${lat}` +
+      `&lng=${lng}` +
+      `&is-seo-homepage-enabled=true` +
+      `&page_type=DESKTOP_WEB_LISTING`;
+
+    const data = await fetchJSON(url, {
+      "User-Agent": "Mozilla/5.0",
+      Accept: "application/json",
     });
 
-    if (!response.ok) {
-      const text = await response.text();
-      return res.status(response.status).json({
-        error: "Failed to fetch Swiggy data",
-        status: response.status,
-        details: text,
-      });
-    }
+    setCache(restaurantCache, key, data);
 
-    const data = await response.json();
     res.json(data);
-  } catch (error) {
+  } catch (err) {
+    console.error("Restaurant fetch failed:", err.message);
+
     res.status(500).json({
-      error: "Internal server error",
-      details: error.message,
+      error: "Unable to fetch restaurants",
     });
   }
 });
 
 app.get("/api/menu", async (req, res) => {
-  const { resId} = req.query;
+  const { resId } = req.query;
+
+  if (!resId) {
+    return res.status(400).json({
+      error: "Restaurant id is required",
+    });
+  }
+
+  const cached = getCache(menuCache, resId);
+
+  if (cached) {
+    return res.json(cached);
+  }
 
   try {
-    if (resId) {
-      try {
-        const liveUrl = `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9716&lng=77.5946&restaurantId=${resId}`;
-        const response = await fetch(liveUrl, {
-          headers: {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-            Accept: "application/json,text/html,*/*",
-            "Accept-Language": "en-US,en;q=0.9",
-            "Sec-Fetch-Site": "same-origin",
-            "Sec-Fetch-Mode": "cors",
-            "Sec-Fetch-Dest": "empty",
-            Referer: `https://www.swiggy.com/restaurants/`,
-            "Referrer-Policy": "strict-origin-when-cross-origin",
-          },
-        });
+    const url =
+      `https://www.swiggy.com/dapi/menu/pl` +
+      `?page-type=REGULAR_MENU` +
+      `&complete-menu=true` +
+      `&lat=12.9716` +
+      `&lng=77.5946` +
+      `&restaurantId=${resId}`;
 
-        const text = await response.text();
+    const data = await fetchJSON(url, {
+      "User-Agent": "Mozilla/5.0",
+      Accept: "application/json",
+    });
 
-        if (!text.trim()) {
-          console.warn(`Empty response for ${resId}`);
-          throw new Error("Empty response");
-        }
-
-        let data;
-        try {
-          data = JSON.parse(text);
-        } catch (e) {
-          console.warn(` Not JSON response for ${resId}`);
-          throw new Error("Invalid JSON");
-        }
-
-        if (data?.data) return res.json(data);
-        else throw new Error("No valid data property");
-      } catch (err) {
-        console.error("Swiggy live fetch failed:", err.message);
-      }
+    if (!data?.data) {
+      throw new Error("Invalid menu response");
     }
 
-    const defaultMockPath = path.resolve(__dirname, `./MockData/mockData.json`);
-    if (fs.existsSync(defaultMockPath)) {
-      const mockData = JSON.parse(fs.readFileSync(defaultMockPath, "utf-8"));
-      return res.json(mockData);
-    }
+    setCache(menuCache, resId, data);
 
-    res.status(404).json({ error: "No menu data found" });
-  } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
+    return res.json(data);
+  } catch (err) {
+    console.warn("Live menu unavailable:", err.message);
+
+    try {
+      const mockPath = path.join(__dirname, "MockData", "mockData.json");
+
+      const file = await fs.readFile(mockPath, "utf-8");
+
+      return res.json(JSON.parse(file));
+    } catch {
+      return res.status(500).json({
+        error: "Unable to fetch menu",
+      });
+    }
   }
 });
 
-app.get("/", (req, res) => {
-  res.send("Swiggy Backend API is running");
+app.get("/", (_, res) => {
+  res.send("Swiggy Backend API is running successfully.");
 });
 
 app.listen(PORT, () => {
-  console.log(`Backend server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
