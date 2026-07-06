@@ -30,7 +30,7 @@ const getRatingIconClass = (rating) => {
 };
 
 const RestaurantCard = (props) => {
-  const { resdata } = props;
+  const { resdata, isAboveFold } = props;
   const {
     name,
     cloudinaryImageId,
@@ -51,7 +51,10 @@ const RestaurantCard = (props) => {
     >
       <div className="relative aspect-[16/10] overflow-hidden">
         <img
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="h-full w-full object-cover transition-transform duration-100 group-hover:scale-105"
+          loading={isAboveFold ? "eager" : "lazy"}
+          fetchpriority={isAboveFold ? "high" : "auto"}
+          decoding="async"
           src={CDN_URL + cloudinaryImageId}
           alt={name || "Restaurant image"}
         />
