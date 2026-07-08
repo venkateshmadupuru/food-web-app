@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import Error from "./components/Error/Error";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Cart from "./components/Cart/Cart";
 import { Provider } from "react-redux";
 import appstore from "./utils/appstore";
 import ProtectedRoute from "./components/Auth/ProtectedRoute";
@@ -13,6 +12,7 @@ import AuthProvider from "./components/Auth/AuthProvider";
 import { Toaster } from "react-hot-toast";
 
 const Menupage = lazy(() => import("./components/Restaurant/Menupage"));
+const Cart = lazy(() => import("./components/Cart/Cart"));
 
 const Browerpath = createBrowserRouter([
   {
@@ -35,7 +35,9 @@ const Browerpath = createBrowserRouter([
         path: "cart",
         element: (
           <ProtectedRoute>
-            <Cart />
+            <Suspense fallback={null}>
+              <Cart />
+            </Suspense>
           </ProtectedRoute>
         ),
       },
@@ -67,5 +69,5 @@ root.render(
         }}
       />
     </AuthProvider>
-  </Provider>
+  </Provider>,
 );
