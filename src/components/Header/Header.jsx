@@ -1,7 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { signOut } from "firebase/auth";
-import { auth } from "../../utils/firebase";
 import { removeUser } from "../../utils/userSlice";
 import { toggleTheme } from "../../utils/themeSlice";
 import { useEffect, useState } from "react";
@@ -39,17 +37,18 @@ const Header = ({ loading }) => {
 
   const { selectedLocationText, selectedLocationAddressText } = locationSummary;
 
-  const handleSignOut = () => {
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-        dispatch(removeUser());
-        setIsDropDown(false);
-        navigate("/");
-      })
-      .catch(() => {
-        navigate("/error");
-      });
+  const handleSignOut = async () => {
+    try {
+      await import("../../utils/firebase");
+      const authModule = await import("firebase/auth");
+      const auth = authModule.getAuth();
+      await authModule.signOut(auth);
+      dispatch(removeUser());
+      setIsDropDown(false);
+      navigate("/");
+    } catch {
+      navigate("/error");
+    }
   };
 
   const handleTheme = () => {
