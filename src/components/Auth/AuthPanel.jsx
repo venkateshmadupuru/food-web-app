@@ -43,7 +43,7 @@ const AuthPanel = () => {
   const title = intent === "cart" ? "Sign in to view your cart" : "Welcome";
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end">
+    <div className="fixed inset-0 z-50 flex justify-end" data-testid="auth-panel">
       <div
         className="absolute inset-0 bg-black/40 dark:bg-black/60 backdrop-blur-sm"
         onClick={onClose}

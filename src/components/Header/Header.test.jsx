@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { configureStore } from "@reduxjs/toolkit";
 import Header from "./Header";
+import AuthPanel from "../Auth/AuthPanel";
 import cartReducer from "../../utils/cartslice";
 import themeReducer from "../../utils/themeSlice";
 import userReducer from "../../utils/userSlice";
@@ -65,12 +66,17 @@ const createTestStore = (preloadedState = {}) => {
   });
 };
 
-const renderHeaderWithStore = ({ loading = false, preloadedState } = {}) => {
+const renderHeaderWithStore = ({
+  loading = false,
+  preloadedState,
+  includeAuthPanel = false,
+} = {}) => {
   const store = createTestStore(preloadedState);
   render(
     <Provider store={store}>
       <BrowserRouter>
         <Header loading={loading} />
+        {includeAuthPanel && <AuthPanel />}
       </BrowserRouter>
     </Provider>
   );
@@ -127,7 +133,7 @@ describe("Header Component", () => {
 
     fireEvent.click(signInButton);
 
-    expect(view.getState().auth).toMatchObject({ open: true, intent: "signin" });
+    expect(view.getState().auth).toMatchObject({open: true,intent: "signin",});
   });
 
   test("opens cart auth drawer when cart is clicked while logged out", () => {
@@ -172,6 +178,22 @@ describe("Header Component", () => {
     ).not.toBeInTheDocument();
     expect(
       within(navigation).getByRole("button", { name: /Test User/i })
+    ).toBeInTheDocument();
+  });
+
+  test("renders login panel when sign in is clicked", async () => {
+    renderHeaderWithStore({ includeAuthPanel: true });
+
+    const signInButton = within(screen.getByRole("navigation")).getByRole(
+      "button",
+      { name: /Sign In/i }
+    );
+
+    fireEvent.click(signInButton);
+
+    expect(await screen.findByTestId("auth-panel")).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /Welcome/i })
     ).toBeInTheDocument();
   });
 });
