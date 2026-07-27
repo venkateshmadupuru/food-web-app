@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { configureStore } from "@reduxjs/toolkit";
@@ -10,6 +10,7 @@ import userReducer from "../../utils/userSlice";
 import authReducer from "../../utils/authSlice";
 import searchReducer from "../../utils/searchSlice";
 import "@testing-library/jest-dom";
+import { signOut } from "firebase/auth";
 
 const mockOpenLocationPanel = jest.fn();
 
@@ -42,7 +43,21 @@ jest.mock("../../utils/useLocationDrawer", () => ({
   }),
 }));
 
-jest.mock("../../utils/firebase", () => ({}));
+jest.mock("../../utils/firebase", () => ({
+  auth: {},
+}));
+
+jest.mock("firebase/auth", () => ({
+  getAuth: jest.fn(() => ({})),
+  signOut: jest.fn(() => Promise.resolve()),
+}));
+
+const mockNavigate = jest.fn();
+
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: () => mockNavigate,
+}));
 
 const createTestStore = (preloadedState = {}) => {
   return configureStore({
@@ -177,7 +192,7 @@ describe("Header Component", () => {
       within(navigation).queryByRole("button", { name: /Sign In/i })
     ).not.toBeInTheDocument();
     expect(
-      within(navigation).getByRole("button", { name: /Test User/i })
+      within(navigation).getByRole("button", { name: /User Profile/i })
     ).toBeInTheDocument();
   });
 
@@ -195,5 +210,72 @@ describe("Header Component", () => {
     expect(
       screen.getByRole("heading", { name: /Welcome/i })
     ).toBeInTheDocument();
+  });
+
+  test("renders cart panel when cart is clicked while logged out", async () => {
+    renderHeaderWithStore({ includeAuthPanel: true });
+
+    const cartButton = within(screen.getByRole("navigation")).getByRole(
+      "button",
+      { name: /Cart/i }
+    );
+    fireEvent.click(cartButton);
+
+    expect(await screen.findByTestId("auth-panel")).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /Sign in to view your cart/i })
+    ).toBeInTheDocument();
+  });
+  
+  test("navigates to cart when authenticated user clicks Cart", () => {
+    renderHeaderWithStore({
+      preloadedState: {
+        user: {
+          uid: "user-1",
+          displayName: "Test User",
+          email: "test@example.com",
+        },
+      },
+    });
+
+    fireEvent.click(
+      within(screen.getByRole("navigation")).getByRole("button", {
+        name: /Cart/i,
+      })
+    );
+
+    expect(mockNavigate).toHaveBeenCalledWith("/cart");
+  });
+
+  test("signs out the user and navigates to home", async () => {
+    renderHeaderWithStore({
+      preloadedState: {
+        user: {
+          uid: "user-1",
+          displayName: "Test User",
+          email: "test@example.com",
+        },
+      },
+    });
+
+    const profileButton = within(screen.getByRole("navigation")).getByRole("button", {
+      name: /user profile/i,
+    });
+
+    fireEvent.focus(profileButton);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Sign Out/i)).toBeInTheDocument();
+    });
+
+    fireEvent.mouseDown(screen.getByText(/Sign Out/i));
+
+    await waitFor(() => {
+      expect(signOut).toHaveBeenCalledTimes(1);
+    });
+
+    await waitFor(() => {
+      expect(mockNavigate).toHaveBeenCalledWith("/");
+    });
   });
 });
