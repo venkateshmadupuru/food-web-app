@@ -38,7 +38,10 @@ const LocationDrawer = ({ drawer }) => {
         aria-label="Close location selection"
       />
 
-      <aside className="absolute left-0 top-0 h-[100dvh] w-full max-w-[540px] overflow-y-auto bg-slate-100 px-8 py-8 shadow-2xl dark:bg-slate-950 sm:px-10">
+      <aside
+        aria-label="Location drawer"
+        className="absolute left-0 top-0 h-[100dvh] w-full max-w-[540px] overflow-y-auto bg-slate-100 px-8 py-8 shadow-2xl dark:bg-slate-950 sm:px-10"
+      >
         <button
           type="button"
           onClick={onClose}
@@ -111,7 +114,7 @@ const LocationDrawer = ({ drawer }) => {
         </div>
       </aside>
     </div>,
-    document.body
+    document.body,
   );
 };
 
