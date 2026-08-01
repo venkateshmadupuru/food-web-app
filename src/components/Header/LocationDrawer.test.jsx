@@ -36,6 +36,17 @@ const renderLocationDrawer = (preloadedState = {}) => {
   return store;
 };
 
+const renderDrawer = (drawerProps = {}) =>
+  render(
+    <LocationDrawer
+      drawer={{
+        isOpen: true,
+        cityOptions: [],
+        ...drawerProps,
+      }}
+    />,
+  );
+
 const TestHarness = () => {
   const { openLocationPanel, closeLocationPanel, drawer } = useLocationDrawer();
 
@@ -100,11 +111,45 @@ describe("LocationDrawer", () => {
         name: /close location selection/i,
       }),
     );
-    
+
     expect(
       screen.queryByRole("complementary", {
         name: /location drawer/i,
       }),
     ).not.toBeInTheDocument();
+  });
+
+  test("calls onUseCurrentLocation when current location button is clicked", () => {
+    const onUseCurrentLocation = jest.fn();
+
+    renderDrawer({ onUseCurrentLocation });
+
+    fireEvent.click(
+      screen.getByRole("button", { name: /get current location/i }),
+    );
+
+    expect(onUseCurrentLocation).toHaveBeenCalledTimes(1);
+  });
+
+  test("calls onSelectCity when a city is selected", () => {
+    const onSelectCity = jest.fn();
+
+    renderDrawer({ onSelectCity, cityOptions: [{ label: "Mumbai, Maharashtra" }] });
+
+    fireEvent.click(screen.getByRole("button", { name: /Mumbai/i }));
+
+    expect(onSelectCity).toHaveBeenCalledWith(
+      expect.objectContaining({
+        label: "Mumbai, Maharashtra",
+      }),
+    );
+  });
+
+  test("shows empty state when no cities are available", () => {
+    renderDrawer({ cityOptions: [] });
+
+    expect(
+      screen.getByText(/no city matches your search/i),
+    ).toBeInTheDocument();
   });
 });
