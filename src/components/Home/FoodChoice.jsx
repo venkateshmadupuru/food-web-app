@@ -61,6 +61,7 @@ const FoodChoices = ({ images }) => {
         <div className="items-center justify-center gap-3 sm:justify-end hidden md:flex">
           <button
             type="button"
+            aria-label="Scroll left"
             onClick={() => scroll("left")}
             disabled={!canScrollLeft}
             className="flex h-11 w-11 items-center justify-center rounded-full bg-gray-200
@@ -73,6 +74,7 @@ const FoodChoices = ({ images }) => {
 
           <button
             type="button"
+            aria-label="Scroll right"
             onClick={() => scroll("right")}
             disabled={!canScrollRight}
             className="flex h-11 w-11 items-center justify-center rounded-full bg-gray-200
@@ -87,6 +89,7 @@ const FoodChoices = ({ images }) => {
 
       <div
         ref={scrollContainerRef}
+        data-testid="food-carousel"
         className="flex overflow-x-auto gap-4 px-2 py-4 scrollbar-hide scroll-smooth
         [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']"
       >
