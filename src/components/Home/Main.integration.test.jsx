@@ -9,7 +9,7 @@ import searchReducer, { openSearch } from "../../utils/searchSlice";
 import locationReducer from "../../utils/locationSlice";
 import useOnlineStatus from "../../hooks/useOnlineStatus";
 import useRestaurants from "../../hooks/useRestaurants";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
 
 jest.mock("../../hooks/useOnlineStatus", () => ({
   __esModule: true,
@@ -71,8 +71,14 @@ const renderMain = () => {
 
   render(
     <Provider store={store}>
-      <MemoryRouter>
-        <Main />
+      <MemoryRouter initialEntries={["/"]}>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route
+            path="/restaurants/:id"
+            element={<div>Restaurant Details</div>}
+          />
+        </Routes>
       </MemoryRouter>
     </Provider>,
   );
@@ -105,5 +111,17 @@ describe("Main component", () => {
 
     expect(filteredRestaurants).toHaveLength(1);
     expect(screen.getByText("Pizza Hut")).toBeInTheDocument();
+  });
+
+  test("navigates to restaurant details when a restaurant is clicked", async () => {
+    const user = userEvent.setup();
+
+    renderMain();
+
+    const restaurant = screen.getByRole("link", { name: /burger king/i });
+
+    await user.click(restaurant);
+
+    expect(screen.getByText("Restaurant Details")).toBeInTheDocument();
   });
 });
