@@ -19,7 +19,7 @@ const Shimmer = () => {
             key={i}
             className="w-full mx-auto bg-white rounded-xl overflow-hidden shadow-md dark:bg-gray-800 dark:shadow-lg"
           >
-            <div className="shimmer w-full h-56"></div>
+            <div className="shimmer w-full aspect-[16/10]"></div>
             <div className="px-3 py-2">
               <div className="shimmer h-6 w-3/4 rounded-md"></div>
               <div className="flex items-center gap-1 mt-3">

@@ -53,8 +53,10 @@ const RestaurantCard = (props) => {
         <img
           className="h-full w-full object-cover transition-transform duration-100 group-hover:scale-105"
           loading={isAboveFold ? "eager" : "lazy"}
-          fetchpriority={isAboveFold ? "high" : "auto"}
+          fetchPriority={isAboveFold ? "high" : "auto"}
           decoding="async"
+          width="300"
+          height="188"
           src={CDN_URL + cloudinaryImageId}
           alt={name || "Restaurant image"}
         />

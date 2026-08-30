@@ -104,6 +104,10 @@ const FoodChoices = ({ images }) => {
               src={CDN_URL + img.imageId}
               alt={img.accessibility?.altText || `carousel-${index}`}
               className="w-full h-full object-contain"
+              loading="lazy"
+              decoding="async"
+              width="176"
+              height="176"
             />
           </div>
         ))}
