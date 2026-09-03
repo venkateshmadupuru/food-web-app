@@ -1,15 +1,16 @@
 import { ChevronDownIcon } from "@heroicons/react/16/solid";
-import Itemslist from "./Itemslist";
+import ItemsList from "./ItemsList";
+import { memo } from "react";
 
-const RestaurantCategory = ({ data, showItems, onToggle }) => {
+const RestaurantCategory = ({ data, showItems, onToggle, index }) => {
   const title = data?.title ?? "Category";
   const count = data?.itemCards?.length ?? 0;
   return (
-    <div className="w-[95%] sm:w-11/12 md:w-9/12 lg:w-6/12 mx-auto my-5 p-4 bg-slate-100 shadow-lg rounded-lg dark:bg-gray-800 dark:text-gray-200 font-serif">
+    <div className="w-[95%] sm:w-11/12 md:w-9/12 lg:w-6/12 mx-auto my-5 p-4 bg-slate-50 shadow-lg rounded-lg dark:bg-gray-800 dark:text-gray-200 font-serif">
       <button
         type="button"
         className="w-full flex justify-between items-center cursor-pointer text-left"
-        onClick={onToggle}
+        onClick={() => onToggle(index)}
       >
         <span className="font-bold text-lg">
           {title}({count})
@@ -24,11 +25,11 @@ const RestaurantCategory = ({ data, showItems, onToggle }) => {
       </button>
       {showItems && (
         <div>
-          <Itemslist items={data?.itemCards ?? []} />
+          <ItemsList items={data?.itemCards ?? []} />
         </div>
       )}
     </div>
   );
 };
 
-export default RestaurantCategory;
+export default memo(RestaurantCategory);

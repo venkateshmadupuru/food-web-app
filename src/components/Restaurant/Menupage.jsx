@@ -1,17 +1,17 @@
 import { useParams } from "react-router-dom";
 import useMenuPage from "../../hooks/useMenuPage";
 import RestaurantCategory from "./RestaurantCategory";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import RestaurantCategoryShimmer from "./RestaurantCategoryShimmer";
+
 const Menupage = () => {
   const { resId } = useParams();
   const { hotelPage, loading, error } = useMenuPage(resId);
-  const [showIndex, setShowIndex] = useState(0);
+  const [showIndex, setShowIndex] = useState(null);
 
-  const handleToggle = (index) => {
-    setShowIndex((prevIndex) => (prevIndex === index ? -1 : index));
-  }
-
+  const handleToggle = useCallback((index) => {
+    setShowIndex((prevIndex) => (prevIndex === index ? null : index));
+  }, []);
   if (loading) return <RestaurantCategoryShimmer />;
 
   if (error)
@@ -46,7 +46,8 @@ const Menupage = () => {
           key={category?.card?.card?.title}
           data={category?.card?.card}
           showItems={index === showIndex}
-          onToggle={() => handleToggle(index)}
+          onToggle={handleToggle}
+          index={index}
         />
       ))}
     </div>
