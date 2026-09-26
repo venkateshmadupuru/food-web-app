@@ -5,15 +5,19 @@ import { memo } from "react";
 const RestaurantCategory = ({ data, showItems, onToggle, index }) => {
   const title = data?.title ?? "Category";
   const count = data?.itemCards?.length ?? 0;
+  const panelId = `category-panel-${index}`;
+
   return (
     <div className="w-[95%] sm:w-11/12 md:w-9/12 lg:w-6/12 mx-auto my-5 p-4 bg-slate-50 shadow-lg rounded-lg dark:bg-gray-800 dark:text-gray-200 font-serif">
       <button
         type="button"
         className="w-full flex justify-between items-center cursor-pointer text-left"
         onClick={() => onToggle(index)}
+        aria-expanded={Boolean(showItems)}
+        aria-controls={panelId}
       >
         <span className="font-bold text-lg">
-          {title}({count})
+          {title} ({count})
         </span>
         <span
           className={`transition-transform duration-300 ${
@@ -23,11 +27,9 @@ const RestaurantCategory = ({ data, showItems, onToggle, index }) => {
           <ChevronDownIcon className="h-7 w-7 text-black dark:text-white" />
         </span>
       </button>
-      {showItems && (
-        <div>
-          <ItemsList items={data?.itemCards ?? []} />
-        </div>
-      )}
+      <div id={panelId} hidden={!showItems}>
+        {showItems && <ItemsList items={data?.itemCards ?? []} />}
+      </div>
     </div>
   );
 };
