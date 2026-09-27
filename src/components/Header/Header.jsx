@@ -2,7 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from "../../utils/userSlice";
 import { toggleTheme } from "../../utils/themeSlice";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import HeaderShimmer from "./HeaderShimmer";
 import CartIcon from "../Cart/CartIcon";
 import { CiUser } from "react-icons/ci";
@@ -11,29 +11,36 @@ import {
   ChevronDownIcon,
   MagnifyingGlassIcon,
   MapPinIcon,
+  XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { openAuth } from "../../utils/authSlice";
-import { openSearch } from "../../utils/searchSlice";
+import {
+  openSearch,
+  closeSearch,
+  clearSearchFocus,
+  setSearchInput,
+  submitSearch,
+} from "../../utils/searchSlice";
 import useLocationDrawer from "../../utils/useLocationDrawer";
 import LocationDrawer from "./LocationDrawer";
 
 const Header = ({ loading }) => {
-  const cartItems = useSelector((store) => store.cart.items);
+  const cartItems = useSelector((store) => store.cart?.items);
   const theme = useSelector((store) => store.theme.mode);
   const user = useSelector((store) => store.user);
+  const isSearchOpen = useSelector((store) => store.search?.isSearchOpen ?? false);
+  const shouldFocusSearch = useSelector((store) => store.search?.shouldFocusSearch ?? false);
+  const searchInput = useSelector((store) => store.search?.searchInput ?? "");
   const [isDropDown, setIsDropDown] = useState(false);
+  const searchInputRef = useRef(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const isAuthenticated = !!user;
 
-  const {
-    locationSummary,
-    openLocationPanel,
-    closeLocationPanel,
-    drawer,
-  } = useLocationDrawer();
+  const { locationSummary, openLocationPanel, closeLocationPanel, drawer } =
+    useLocationDrawer();
 
   const { selectedLocationText, selectedLocationAddressText } = locationSummary;
 
@@ -64,7 +71,21 @@ const Header = ({ loading }) => {
     }
     navigate("/cart");
   };
+  const handleSearchSubmit = () => {
+    dispatch(submitSearch());
+    if (location.pathname !== "/") {
+      navigate("/");
+    }
+  };
+  const handleCloseSearch = () => {
+    dispatch(closeSearch());
+  };
   const handleSearchClick = () => {
+    if (isSearchOpen) {
+      handleSearchSubmit();
+      return;
+    }
+
     dispatch(openSearch());
 
     if (location.pathname !== "/") {
@@ -80,6 +101,13 @@ const Header = ({ loading }) => {
   useEffect(() => {
     closeLocationPanel();
   }, [location.pathname, closeLocationPanel]);
+
+  useEffect(() => {
+    if (isSearchOpen && shouldFocusSearch) {
+      searchInputRef.current?.focus();
+      dispatch(clearSearchFocus());
+    }
+  }, [isSearchOpen, shouldFocusSearch, dispatch]);
 
   if (loading) {
     return <HeaderShimmer />;
@@ -125,9 +153,60 @@ const Header = ({ loading }) => {
               <ChevronDownIcon className="hidden h-4 w-4 shrink-0 md:block" />
             </button>
           </div>
-
-          <nav className="flex items-center gap-1 sm:gap-2">
-            <button type="button" onClick={handleTheme} className={navItemClass}>
+          <div className="hidden min-w-0 flex-1 justify-center px-4 md:flex">
+            {isSearchOpen && (
+              <form
+                className="relative w-full max-w-md"
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  handleSearchSubmit();
+                }}
+              >
+                <input
+                  ref={searchInputRef}
+                  type="text"
+                  aria-label="Search restaurants"
+                  placeholder="Search restaurants"
+                  value={searchInput}
+                  onChange={(event) =>
+                    dispatch(setSearchInput(event.target.value))
+                  }
+                  className="h-10 w-full rounded-full border border-slate-300 bg-white px-4 pr-10 text-sm text-slate-900 outline-none transition focus:border-orange-500 focus:ring-2 focus:ring-orange-200 dark:border-slate-600 dark:bg-slate-800 dark:text-white"
+                />
+                <button
+                  type="submit"
+                  aria-label="Submit search"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 transition hover:text-orange-500 dark:text-slate-300"
+                >
+                  <MagnifyingGlassIcon className="h-5 w-5" />
+                </button>
+                <button
+                  type="button"
+                  aria-label="Close search"
+                  onClick={handleCloseSearch}
+                  className="absolute right-10 top-1/2 -translate-y-1/2 text-slate-500 transition hover:text-orange-500 dark:text-slate-300"
+                >
+                  <XMarkIcon className="h-5 w-5" />
+                </button>
+              </form>
+            )}
+          </div>
+          <nav className="flex shrink-0 items-center gap-1 sm:gap-2">
+            {!isSearchOpen && (
+              <button
+                type="button"
+                onClick={handleSearchClick}
+                className={`hidden md:inline-flex ${navItemClass}`}
+              >
+                <MagnifyingGlassIcon className="h-5 w-5" />
+                <span className="hidden sm:inline">Search</span>
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={handleTheme}
+              className={navItemClass}
+            >
               {theme === "light" ? (
                 <MoonIcon className="h-5 w-5" />
               ) : (
@@ -136,14 +215,6 @@ const Header = ({ loading }) => {
               <span className="hidden sm:inline">
                 {theme === "light" ? "Dark" : "Light"}
               </span>
-            </button>
-            <button
-              type="button"
-              onClick={handleSearchClick}
-              className={navItemClass}
-            >
-              <MagnifyingGlassIcon className="h-5 w-5" />
-              <span className="hidden sm:inline">Search</span>
             </button>
             <button
               type="button"
