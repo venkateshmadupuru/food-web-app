@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { setLocation } from "./locationSlice";
 import { DEFAULT_LOCATION, LOCATION_OPTIONS } from "./constants";
 import toast from "react-hot-toast";
@@ -20,7 +21,10 @@ const getCurrentPosition = (options) => {
 
 const useLocationDrawer = () => {
   const dispatch = useDispatch();
-  const selectedLocation = useSelector((store) => store.location.selectedLocation);
+  const navigate = useNavigate();
+  const selectedLocation = useSelector(
+    (store) => store.location.selectedLocation,
+  );
 
   const [isOpen, setIsOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -56,7 +60,7 @@ const useLocationDrawer = () => {
       setSearchValue("");
       setIsOpen(false);
     },
-    [dispatch]
+    [dispatch],
   );
 
   const selectCity = useCallback(
@@ -65,8 +69,9 @@ const useLocationDrawer = () => {
         ...cityOption,
         displayLabel: getCityName(cityOption.label),
       });
+      navigate("/",{replace:true});
     },
-    [applyLocation]
+    [applyLocation, navigate],
   );
 
   const cityOptions = useMemo(() => {
@@ -115,7 +120,7 @@ const useLocationDrawer = () => {
 
       selectCity(matchedCity);
     },
-    [cityOptions, normalizedSearchValue, selectCity]
+    [cityOptions, normalizedSearchValue, selectCity],
   );
 
   const handleUseCurrentLocation = useCallback(async () => {

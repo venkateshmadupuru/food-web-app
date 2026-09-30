@@ -43,8 +43,8 @@ export const LOCATION_OPTIONS = [
   {
     label: "Pune, Maharashtra",
     address: "Pune, Maharashtra, India",
-    lat: "18.5204",
-    lng: "73.8567",
+    lat: "18.5362",
+    lng: "73.8958",
   },
   {
     label: "Ahmedabad, Gujarat",
