@@ -26,12 +26,16 @@ const useRestaurants = (lat, lng) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
+  const [retryCount, setRetryCount] = useState(0);
+
+  const retry = () => setRetryCount((previousCount) => previousCount + 1);
 
   useEffect(() => {
     if (!lat || !lng) {
       setRestaurants([]);
       setImageGrids([]);
       setData(null);
+      setError(null);
       setLoading(false);
       return;
     }
@@ -78,6 +82,7 @@ const useRestaurants = (lat, lng) => {
       setData(cachedData);
       setRestaurants(getRestaurantsFromResponse(cards));
       setImageGrids(getImageGridsFromResponse(cards));
+      setError(null);
       setLoading(false);
       return;
     }
@@ -125,9 +130,9 @@ const useRestaurants = (lat, lng) => {
     return () => {
       ignore = true;
     };
-  }, [lat, lng]);
+  }, [lat, lng, retryCount]);
 
-  return { restaurants, imageGrids, loading, error, data };
+  return { restaurants, imageGrids, loading, error, data, retry };
 };
 
 export default useRestaurants;

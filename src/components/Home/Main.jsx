@@ -17,7 +17,17 @@ const Main = () => {
   const selectedLocation = useSelector((store) => store.location?.selectedLocation);
   const activeLat = selectedLocation?.lat || DEFAULT_LOCATION.lat;
   const activeLng = selectedLocation?.lng || DEFAULT_LOCATION.lng;
-  const { restaurants, imageGrids, loading, error } = useRestaurants(activeLat, activeLng);
+  const { restaurants, imageGrids, loading, error, retry } = useRestaurants(
+    activeLat,
+    activeLng,
+  );
+  const cityName =
+    selectedLocation?.label?.split(",")[0] ||
+    DEFAULT_LOCATION.label.split(",")[0];
+  const locationHeading =
+    selectedLocation?.displayLabel === "Current location"
+      ? "Top restaurant chains near you"
+      : `Top restaurant chains in ${cityName}`;
 
   const normalizedSearchQuery = searchQuery.trim().toLowerCase();
   const filteredRestaurant = restaurants.filter((restaurant) => {
@@ -48,14 +58,25 @@ const Main = () => {
     );
   }
   if (loading) return <Shimmer />;
-  if (error) return <div>Unable to load restaurants.</div>;
-  const locationHeading =
-    selectedLocation?.displayLabel === "Current location"
-      ? "Top restaurant chains near you"
-      : `Top restaurant chains in ${
-          selectedLocation?.label?.split(",")[0] ||
-          DEFAULT_LOCATION.label.split(",")[0]
-        }`;
+  if (error) {
+    return (
+      <div
+        role="alert"
+        className="flex min-h-[40vh] flex-col items-center justify-center gap-4 px-4 text-center"
+      >
+        <p className="text-lg font-semibold text-slate-800 dark:text-slate-100">
+          Could not load restaurants in {cityName}.
+        </p>
+        <button
+          type="button"
+          onClick={retry}
+          className="cursor-pointer rounded-md border border-orange-600 bg-orange-600 px-5 py-2 font-semibold text-white transition-colors hover:bg-orange-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 dark:border-orange-500 dark:bg-orange-500 dark:hover:bg-orange-600"
+        >
+          Retry
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="font-serif w-full px-3 sm:px-6">
@@ -89,16 +110,35 @@ const Main = () => {
       <h2 className="text-gray-900 dark:text-white text-xl md:text-2xl px-1 mb-4 font-semibold">
         {locationHeading}
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 no-underline">
-        {filteredRestaurant.map((restaurant, index) => (
-          <Link
-            key={restaurant.info.id}
-            to={`/restaurants/${restaurant.info.id}`}
-          >
-            <RestaurantCard resdata={restaurant} isAboveFold={index < 5} />
-          </Link>
-        ))}
-      </div>
+      {restaurants.length === 0 ? (
+        <div
+          role="status"
+          className="py-12 text-center text-slate-600 dark:text-slate-300"
+        >
+          <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+            Restaurants aren&apos;t available in {cityName} right now.
+          </h3>
+          <p className="mt-2">Try selecting another location.</p>
+        </div>
+      ) : filteredRestaurant.length === 0 ? (
+        <p
+          role="status"
+          className="py-12 text-center text-slate-600 dark:text-slate-300"
+        >
+          No restaurants match &quot;{searchQuery}&quot;.
+        </p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 no-underline">
+          {filteredRestaurant.map((restaurant, index) => (
+            <Link
+              key={restaurant.info.id}
+              to={`/restaurants/${restaurant.info.id}`}
+            >
+              <RestaurantCard resdata={restaurant} isAboveFold={index < 5} />
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
