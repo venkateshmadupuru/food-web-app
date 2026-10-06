@@ -6,6 +6,7 @@ import { clearCart } from "../../utils/cartslice";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { MdDeleteOutline, MdRemoveShoppingCart } from "react-icons/md";
+import { Link } from "react-router-dom";
 import { calculateBillDetails, formatCurrency } from "../../utils/cartUtils";
 
 const Cart = () => {
@@ -42,6 +43,12 @@ const Cart = () => {
           <p className="text-lg text-gray-500 font-semibold mt-1 dark:text-gray-300">
             Let's fill it with something delicious
           </p>
+          <Link
+            to="/"
+            className="mt-5 inline-flex cursor-pointer items-center justify-center rounded-md bg-orange-600 px-5 py-2 font-semibold text-white transition-colors hover:bg-orange-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 dark:bg-orange-500 dark:hover:bg-orange-600"
+          >
+            Explore restaurants
+          </Link>
         </div>
       )}
       {cartItems.length > 0 && (
